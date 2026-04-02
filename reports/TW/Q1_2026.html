@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>台灣飲料與包材產業情報報告｜2026 Q1</title>
+  <style>
+    :root {
+      --primary: #1a3a5c;
+      --accent: #2e86ab;
+      --green: #27ae60;
+      --orange: #e67e22;
+      --red: #c0392b;
+      --purple: #8e44ad;
+      --gray-light: #f5f7fa;
+      --gray-mid: #dce3ed;
+      --text-main: #2c3e50;
+      --text-muted: #6c7a89;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans TC', 'Microsoft JhengHei', 'Segoe UI', sans-serif;
+      background: var(--gray-light);
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #0d2340 100%);
+      color: white;
+      padding: 48px 40px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(46,134,171,0.15);
+    }
+    header::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(46,134,171,0.10);
+    }
+    header .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    header .badge:hover { background: #1f6a8a; }
+    header h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    header .subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 24px;
+    }
+    .meta-bar {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      font-size: 0.82rem; color: rgba(255,255,255,0.7);
+    }
+    .meta-bar span { display: flex; align-items: center; gap: 6px; }
+
+    /* ===== NAV PILLS ===== */
+    .nav-container {
+      background: white;
+      border-bottom: 1px solid var(--gray-mid);
+      padding: 12px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow-x: auto;
+    }
+    .nav-pills { display: flex; gap: 8px; min-width: max-content; }
+    .nav-pills a {
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1.5px solid var(--gray-mid);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .nav-pills a:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      background: white;
+      border-bottom: 1px solid var(--gray-mid);
+      padding: 20px 40px;
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-item .num {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-item .lbl {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    .main { max-width: 1180px; margin: 0 auto; padding: 36px 40px; }
+
+    /* ===== COUNTRY SECTION ===== */
+    .country-section {
+      background: white;
+      border-radius: 14px;
+      margin-bottom: 36px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+    .country-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--gray-mid);
+    }
+    .country-flag { font-size: 2rem; line-height: 1; }
+    .country-name { font-size: 1.25rem; font-weight: 800; color: var(--primary); }
+    .country-count {
+      margin-left: auto;
+      background: var(--gray-light);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* ===== CATEGORY TABS ===== */
+    .category-group { padding: 0 28px 24px; }
+    .category-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin: 22px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid var(--gray-mid);
+    }
+    .cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .dot-pet  { background: #2e86ab; }
+    .dot-pack { background: #27ae60; }
+    .dot-cap  { background: #e67e22; }
+    .dot-new  { background: #8e44ad; }
+    .dot-raw  { background: #e74c3c; }
+    .dot-reg  { background: #16a085; }
+
+    /* ===== NEWS CARD ===== */
+    .news-card {
+      border: 1px solid var(--gray-mid);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      transition: box-shadow 0.2s;
+      position: relative;
+    }
+    .news-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .news-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .news-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.4;
+      flex: 1;
+    }
+    .news-title a { color: inherit; text-decoration: none; }
+    .news-title a:hover { color: var(--accent); text-decoration: underline; }
+    .news-meta {
+      display: flex; gap: 10px; flex-shrink: 0;
+      flex-direction: column; align-items: flex-end;
+    }
+    .news-date { font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; }
+    .news-source {
+      font-size: 0.7rem; background: var(--gray-light);
+      color: var(--text-muted); padding: 2px 8px;
+      border-radius: 4px; white-space: nowrap;
+    }
+    .news-summary { font-size: 0.84rem; color: var(--text-main); line-height: 1.65; }
+    .news-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 8px; font-size: 0.72rem;
+      color: var(--accent); text-decoration: none;
+    }
+    .news-link:hover { text-decoration: underline; }
+
+    .no-news {
+      background: var(--gray-light);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .no-news::before { content: '👉 '; }
+
+    /* ===== TAGS ===== */
+    .tag {
+      display: inline-block; font-size: 0.66rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 4px;
+      margin-right: 4px; margin-top: 6px;
+    }
+    .tag-pet  { background: #dbeefb; color: #1a6fa0; }
+    .tag-rpet { background: #c8e6c9; color: #2e7d32; }
+    .tag-alum { background: #fff3e0; color: #e65100; }
+    .tag-reg  { background: #e8f5e9; color: #1b5e20; }
+    .tag-new  { background: #f3e5f5; color: #6a1b9a; }
+    .tag-epr  { background: #e0f2f1; color: #004d40; }
+    .tag-raw  { background: #fce4ec; color: #880e4f; }
+    .tag-carbon { background: #e8eaf6; color: #283593; }
+
+    /* ===== NEWS IMAGE THUMB ===== */
+    .news-card.has-img {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .news-img {
+      width: 160px; height: 120px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 6px;
+      overflow: hidden; flex-shrink: 0;
+    }
+    .news-img-fallback {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 6px; border-radius: 8px;
+    }
+    .news-img-icon { font-size: 2.2rem; line-height: 1; }
+    .news-img-label {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75;
+    }
+    .news-card.has-img .news-body { flex: 1; }
+    .img-rpet    { background: linear-gradient(135deg, #1a7a4a 0%, #27ae60 60%, #52c27a 100%); color: white; }
+    .img-pet     { background: linear-gradient(135deg, #1565c0 0%, #2196f3 60%, #64b5f6 100%); color: white; }
+    .img-alum    { background: linear-gradient(135deg, #bf360c 0%, #e64a19 60%, #ff7043 100%); color: white; }
+    .img-new     { background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 60%, #ab47bc 100%); color: white; }
+    .img-reg     { background: linear-gradient(135deg, #004d40 0%, #00796b 60%, #26a69a 100%); color: white; }
+    .img-raw     { background: linear-gradient(135deg, #4e342e 0%, #6d4c41 60%, #a1887f 100%); color: white; }
+    .img-carbon  { background: linear-gradient(135deg, #1a237e 0%, #283593 60%, #5c6bc0 100%); color: white; }
+    @media (max-width: 640px) {
+      .news-card.has-img { grid-template-columns: 1fr; }
+      .news-img { width: 100%; height: 110px; }
+    }
+
+    /* ===== ANALYSIS SECTION ===== */
+    .analysis-section {
+      background: linear-gradient(135deg, var(--primary) 0%, #0d2340 100%);
+      color: white;
+      border-radius: 14px;
+      padding: 36px 40px;
+      margin-bottom: 36px;
+    }
+    .analysis-section h2 {
+      font-size: 1.4rem; font-weight: 800;
+      margin-bottom: 24px; padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px; margin-bottom: 24px;
+    }
+    .analysis-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px; padding: 20px;
+    }
+    .analysis-card h3 {
+      font-size: 0.85rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.6); margin-bottom: 12px;
+    }
+    .analysis-card p { font-size: 0.88rem; color: rgba(255,255,255,0.9); line-height: 1.65; }
+    .rank-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .rank-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--accent); color: white;
+      font-size: 0.7rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .rank-text { font-size: 0.87rem; color: rgba(255,255,255,0.9); }
+    .bar-wrap { margin-top: 6px; }
+    .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .bar-label { font-size: 0.8rem; color: rgba(255,255,255,0.8); width: 90px; flex-shrink: 0; }
+    .bar-bg { flex: 1; background: rgba(255,255,255,0.1); border-radius: 4px; height: 8px; }
+    .bar-fill { height: 8px; border-radius: 4px; background: var(--accent); }
+    .bar-count { font-size: 0.75rem; color: rgba(255,255,255,0.6); width: 24px; text-align: right; }
+    .insight-list { list-style: none; }
+    .insight-list li {
+      padding: 8px 0; font-size: 0.88rem;
+      color: rgba(255,255,255,0.9);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; gap: 10px;
+    }
+    .insight-list li::before { content: '▸'; color: var(--accent); flex-shrink: 0; }
+    .insight-list li:last-child { border-bottom: none; }
+    .watch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .watch-item {
+      background: rgba(255,255,255,0.06);
+      border-left: 3px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+    }
+    .watch-item .w-title { font-size: 0.82rem; font-weight: 700; color: white; margin-bottom: 4px; }
+    .watch-item .w-desc { font-size: 0.78rem; color: rgba(255,255,255,0.7); }
+
+    /* ===== SECTION DIVIDER ===== */
+    .section-title {
+      font-size: 1.1rem; font-weight: 800; color: var(--primary);
+      margin: 40px 0 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::after {
+      content: ''; flex: 1; height: 2px;
+      background: linear-gradient(90deg, var(--gray-mid), transparent);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center; padding: 24px;
+      font-size: 0.78rem; color: var(--text-muted);
+      border-top: 1px solid var(--gray-mid);
+    }
+    footer span { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="badge" href="../../index.html">← 產業情報 · 季報資料庫</a>
+  <h1>台灣飲料與包材產業情報</h1>
+  <p class="subtitle">2026 年 Q1（1月～3月）新聞蒐集與分析報告</p>
+  <div class="meta-bar">
+    <span>📅 報告期間：2026.01 – 2026.03</span>
+    <span>🇹🇼 涵蓋地區：台灣</span>
+    <span>📦 主題：PET飲料・包材・鋁蓋・新品・法規</span>
+    <span>📄 生成日期：2026.04.02</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<div class="nav-container">
+  <div class="nav-pills">
+    <a href="#taiwan">🇹🇼 台灣</a>
+    <a href="#analysis">📊 總分析</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item"><span class="num">1</span><span class="lbl">涵蓋地區</span></div>
+  <div class="stat-item"><span class="num">14</span><span class="lbl">新聞條目</span></div>
+  <div class="stat-item"><span class="num">6</span><span class="lbl">主要分類</span></div>
+  <div class="stat-item"><span class="num">rPET</span><span class="lbl">最熱門主題</span></div>
+  <div class="stat-item"><span class="num">碳費</span><span class="lbl">最熱門法規</span></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ==================== TAIWAN ==================== -->
+  <div class="country-section" id="taiwan">
+    <div class="country-header">
+      <div class="country-flag">🇹🇼</div>
+      <div><div class="country-name">台灣 Taiwan</div></div>
+      <div class="country-count">14 則新聞</div>
+    </div>
+    <div class="category-group">
+
+      <!-- PET -->
+      <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <div class="news-img-fallback img-rpet">
+            <span class="news-img-icon">♻️</span>
+            <span class="news-img-label">rPET 瓶</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.reccessary.com/zh-tw/news/taiwan-first-rpet-bottle-drinks" target="_blank">台灣高回收率卻是「假循環」？民間推首款 rPET 瓶裝茶實踐綠色包裝</a></div>
+            <div class="news-meta"><span class="news-date">2025年5月（延續至2026 Q1）</span><span class="news-source">Reccessary</span></div>
+          </div>
+          <div class="news-summary">主婦聯盟推出台灣首款食品級 rPET 瓶裝飲料「綠主張紅烏龍茶」，瓶身含 30% rPET，採輕量瓶及易撕標籤設計，實現 3–5 次封閉式「瓶到瓶」循環。台灣每年流通約 54 億支寶特瓶，回收率達 95%，但大多降級為紡織品，形成「假循環」，民間積極呼籲環境部比照歐盟訂立強制 rPET 含量標準。</div>
+          <span class="tag tag-rpet">rPET</span><span class="tag tag-pet">PET瓶</span>
+          <a class="news-link" href="https://www.reccessary.com/zh-tw/news/taiwan-first-rpet-bottle-drinks" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <div class="news-img-fallback img-pet">
+            <span class="news-img-icon">🍵</span>
+            <span class="news-img-label">rPET 30%</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://e-info.org.tw/node/241229" target="_blank">【連署支持】推動台灣飲料商 2030 年寶特瓶再生塑膠含量達 30%</a></div>
+            <div class="news-meta"><span class="news-date">2026年Q1 持續推進</span><span class="news-source">環境資訊中心</span></div>
+          </div>
+          <div class="news-summary">民間團體推動連署，要求台灣飲料廠商在 2030 年前讓寶特瓶 rPET 含量達 30%，對齊歐盟標準（2025 年 25%、2030 年 30%）。台灣環境部與食藥署雖已完備 rPET 食品接觸許可法規，但尚未設立強制比例目標，導致廠商轉型誘因不足，民間持續施壓。</div>
+          <span class="tag tag-rpet">rPET</span><span class="tag tag-reg">法規倡議</span>
+          <a class="news-link" href="https://e-info.org.tw/node/241229" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <!-- PACKAGING -->
+      <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <div class="news-img-fallback img-reg">
+            <span class="news-img-icon">🌿</span>
+            <span class="news-img-label">低碳包材補助</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://metabiz.tw/restaurant-eco-packaging-subsidy-guide-2026/" target="_blank">2026 餐飲業「低碳環保包材」補助上路，最高補助 500 萬元</a></div>
+            <div class="news-meta"><span class="news-date">2026年1月30日截止申請</span><span class="news-source">MetaBiz</span></div>
+          </div>
+          <div class="news-summary">2026 年碳費正式開徵後，政府透過 SIIR（服務業創新研發計畫）提供最高 150 萬至 500 萬元補助，協助餐飲與飲料業者轉型低碳環保包材，補助金額最高 60% 可用於行銷推廣。此計畫提前鼓勵業者在碳費壓力成形前完成包材轉型，加速環保包材市場需求。</div>
+          <span class="tag tag-epr">補助政策</span><span class="tag tag-carbon">碳費</span>
+          <a class="news-link" href="https://metabiz.tw/restaurant-eco-packaging-subsidy-guide-2026/" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-top">
+          <div class="news-title"><a href="https://www.geweb.com.tw/en/2025-food-packaging-trends/" target="_blank">2025–2026 食品包裝趨勢：永續、功能性與品牌化三核心</a></div>
+          <div class="news-meta"><span class="news-date">2026年Q1</span><span class="news-source">安欣印藝 Geweb</span></div>
+        </div>
+        <div class="news-summary">台灣食品包裝業者指出，減塑要求推動品牌轉向再生材料、輕量化設計與易回收結構。台灣 2050 淨零轉型計畫要求 2030 年前非食品塑膠容器須含 30% 再生材料，對飲料包材選擇策略影響深遠；品牌包裝同步朝向智慧標籤（QR Code）與減少過度包裝方向演進。</div>
+        <span class="tag tag-pet">包材趨勢</span><span class="tag tag-rpet">再生材料</span>
+        <a class="news-link" href="https://www.geweb.com.tw/en/2025-food-packaging-trends/" target="_blank">🔗 閱讀原文</a>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-top">
+          <div class="news-title"><a href="https://www.honchuan.com/en/products/rpet-bottle" target="_blank">宏全國際 rPET 瓶全線解決方案（10%～100% rPET 含量）</a></div>
+          <div class="news-meta"><span class="news-date">2026年Q1 持續推廣</span><span class="news-source">Hon Chuan Group 宏全國際</span></div>
+        </div>
+        <div class="news-summary">宏全國際提供 10%～100% rPET 含量的完整瓶胚解決方案，年產 PET 瓶達 118 億支，並於海內外共設 47 個生產據點。隨台灣與東南亞品牌客戶對 rPET 導入需求增加，宏全持續強化 rPET 技術儲備，成為台灣飲料業由傳統 PET 向 rPET 轉型的關鍵供應商。</div>
+        <span class="tag tag-rpet">rPET供應</span><span class="tag tag-pet">PET瓶胚</span>
+        <a class="news-link" href="https://www.honchuan.com/en/products/rpet-bottle" target="_blank">🔗 閱讀原文</a>
+      </div>
+
+      <!-- ALUMINUM CAP -->
+      <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋 / 金屬蓋</div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <div class="news-img-fallback img-alum">
+            <span class="news-img-icon">🥫</span>
+            <span class="news-img-label">GCM 鋁罐</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.greatchina.com.tw" target="_blank">大華金屬（GCM）— 台灣唯一綜合包裝容器製造商，35% 鋁罐市占</a></div>
+            <div class="news-meta"><span class="news-date">2026年Q1</span><span class="news-source">Great China Metal 大華金屬工業</span></div>
+          </div>
+          <div class="news-summary">大華金屬為台灣國內唯一綜合性包裝容器製造廠，鋁罐市占率約 35%，提供 25 種罐型（含標準罐、DRD 罐）及 30 種罐蓋規格共 55 種選擇。鋁罐應用持續從傳統碳酸飲料擴展至能量飲料、即飲雞尾酒等新興品類，台灣垂直整合供應鏈有利於一站式包材採購。</div>
+          <span class="tag tag-alum">鋁罐/蓋</span>
+          <a class="news-link" href="https://www.greatchina.com.tw" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-top">
+          <div class="news-title"><a href="https://www.honchuan.com/en/product-series/metal_lug_cap" target="_blank">宏全爪蓋（Metal Lug Cap）年產能達 5.6 億個，全自動化生產線</a></div>
+          <div class="news-meta"><span class="news-date">2026年Q1</span><span class="news-source">Hon Chuan Group 宏全國際</span></div>
+        </div>
+        <div class="news-summary">宏全爪蓋（Metal Lug Cap）產線全面自動化並配備線上檢驗機，年產能 5.6 億個。宏全同時提供 PET 瓶胚、塑蓋、鋁蓋、爪蓋及飲料充填一站式服務，金屬蓋產品在高端飲料包裝市場（如機能飲、茶飲）需求穩定。</div>
+        <span class="tag tag-alum">爪蓋</span><span class="tag tag-pet">一站式包材</span>
+        <a class="news-link" href="https://www.honchuan.com/en/product-series/metal_lug_cap" target="_blank">🔗 閱讀原文</a>
+      </div>
+
+      <!-- NEW PRODUCTS -->
+      <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <div class="news-img-fallback img-new">
+            <span class="news-img-icon">🧃</span>
+            <span class="news-img-label">泰山新品</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.taisunshop.com.tw/categories/new-arrivals" target="_blank">泰山企業 Q1 新品：Cherrs 水蜜桃氣泡水、冰鎮泡泡果茶系列上市</a></div>
+            <div class="news-meta"><span class="news-date">2026年Q1</span><span class="news-source">泰山線上購 taisunshop.com.tw</span></div>
+          </div>
+          <div class="news-summary">泰山企業於 2026 年第一季推出「Cherrs 水蜜桃氣泡水」及「冰鎮泡泡果茶」系列，以寶特瓶包裝為主，主打氣泡口感與台灣在地果實（如文旦果粒）。主力品項「冰鎮果の実感」系列以獨家大果粒充填技術為賣點，顯示台灣飲料市場持續以口感創新與在地化原料作為競爭核心。</div>
+          <span class="tag tag-new">新品上市</span><span class="tag tag-pet">PET瓶</span>
+          <a class="news-link" href="https://www.taisunshop.com.tw/categories/new-arrivals" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-top">
+          <div class="news-title"><a href="https://www.milksha.com/news.php?cID=2" target="_blank">迷客夏「焦糖茶沙龍」系列 ＆「迷の瓶」區域限定瓶裝新品上市</a></div>
+          <div class="news-meta"><span class="news-date">2026年2–3月</span><span class="news-source">迷客夏 Milksha 官網</span></div>
+        </div>
+        <div class="news-summary">手搖飲品牌迷客夏於 2026 年 3 月推出「焦糖茶沙龍」系列（3 款紅茶風味），並在 2 月起推出「迷の瓶」區域限定罐/瓶裝商品，強化實體瓶裝通路布局。2026 Q1 台灣手搖飲品牌普遍以聯名、限定包裝拉抬話題，包裝設計差異化成為品牌競爭關鍵。</div>
+        <span class="tag tag-new">新品</span><span class="tag tag-pet">瓶裝通路</span>
+        <a class="news-link" href="https://www.milksha.com/news.php?cID=2" target="_blank">🔗 閱讀原文</a>
+      </div>
+
+      <!-- RAW MATERIALS -->
+      <div class="category-label"><span class="cat-dot dot-raw"></span>原物料</div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <div class="news-img-fallback img-raw">
+            <span class="news-img-icon">☕</span>
+            <span class="news-img-label">咖啡豆漲價</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://udn.com/news/story/7241/8542265" target="_blank">路易莎漲價最高 15 元、咖啡豆採購成本漲逾 20%，原物料壓力全面傳導</a></div>
+            <div class="news-meta"><span class="news-date">2026年1月6日</span><span class="news-source">壹蘋新聞網 / 聯合新聞網</span></div>
+          </div>
+          <div class="news-summary">台灣連鎖咖啡品牌路易莎自 2026 年 1 月 6 日起調漲約 90 項商品，最高漲 15 元，主因為咖啡豆、工資及水電成本大幅上升。國際咖啡貿易商預測 2025–2026 年底全球咖啡豆供應缺口約 850 萬袋，部分業者購豆成本上漲逾 20%，成本壓力正加速飲料業評估包材輕量化與再生材料以控制整體生產成本。</div>
+          <span class="tag tag-raw">咖啡豆</span><span class="tag tag-raw">原料漲價</span>
+          <a class="news-link" href="https://udn.com/news/story/7241/8542265" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-top">
+          <div class="news-title"><a href="https://www.globenewswire.com/news-release/2026/02/24/3243755/0/en/Lightweight-Aluminium-Beverage-Cans-Market-to-Reach-USD-35.04-Billion-by-2035-Growing-at-a-CAGR-of-7-5.html" target="_blank">全球輕量化鋁罐市場 2035 年達 350 億美元，亞太區年增 12.3%</a></div>
+          <div class="news-meta"><span class="news-date">2026年2月24日</span><span class="news-source">GlobeNewswire</span></div>
+        </div>
+        <div class="news-summary">全球輕量化鋁罐市場預計至 2035 年達 350 億美元（CAGR 7.5%），亞太區年增率高達 12.3%，印度、越南等新興市場預估 2027 年前消費量翻倍。此趨勢對台灣鋁罐製造商（大華金屬、芳泉工業）形成出口機遇；惟鋁原料成本波動仍是台灣製罐業的主要風險變數。</div>
+        <span class="tag tag-alum">鋁原料</span><span class="tag tag-raw">市場趨勢</span>
+        <a class="news-link" href="https://www.globenewswire.com/news-release/2026/02/24/3243755/0/en/Lightweight-Aluminium-Beverage-Cans-Market-to-Reach-USD-35.04-Billion-by-2035-Growing-at-a-CAGR-of-7-5.html" target="_blank">🔗 閱讀原文</a>
+      </div>
+
+      <!-- REGULATION -->
+      <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <div class="news-img-fallback img-reg">
+            <span class="news-img-icon">♻️</span>
+            <span class="news-img-label">塑膠政策修正</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.eco-business.com/news/taiwan-shifts-plastic-policy-away-from-bans-sets-new-reduction-targets/" target="_blank">台灣修正塑膠政策：告別全面禁令，改設 2030 年減量 5%、2035 年 10% 新目標</a></div>
+            <div class="news-meta"><span class="news-date">2026年1月5日</span><span class="news-source">Eco-Business Asia Pacific</span></div>
+          </div>
+          <div class="news-summary">台灣環境部宣布放棄原訂 2025–2030 年完全禁用四大一次性塑膠品的目標，改設以 2024 年為基準、2030 年減量 5%、2035 年減量 10% 的新路線，管制類別從 4 類擴增至 6 類（新增零售包裝與電商包材）。政策以經濟誘因取代強制禁令，擴大循環借杯系統並規劃「杯費分開計價」機制。此政策轉向對台灣飲料業包材選擇策略影響重大，短期降低合規壓力但也延緩全面去塑時程。</div>
+          <span class="tag tag-reg">法規</span><span class="tag tag-epr">減塑政策</span>
+          <a class="news-link" href="https://www.eco-business.com/news/taiwan-shifts-plastic-policy-away-from-bans-sets-new-reduction-targets/" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <div class="news-img-fallback img-carbon">
+            <span class="news-img-icon">🏭</span>
+            <span class="news-img-label">碳費開徵</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.cca.gov.tw/affairs/carbon-fee-fund/2301.html" target="_blank">台灣碳費 2026 年正式開徵：一般費率每噸 NT$300，約 500 家工廠納管</a></div>
+            <div class="news-meta"><span class="news-date">2026年（正式生效）</span><span class="news-source">環境部氣候變遷署</span></div>
+          </div>
+          <div class="news-summary">台灣碳費 2026 年正式開徵，一般費率每公噸 CO₂ 當量 NT$300，首波徵收對象為年排放逾 2.5 萬公噸的製造業及電力業（約 500 家）。飲料廠及包材製造商若超過門檻，需繳交碳費或提出自主減量計畫（優惠費率 NT$50–100）。碳費開徵加速企業評估低碳包材與再生材料的轉型投資，政府並提供最高 500 萬元 SIIR 補助協助轉型。</div>
+          <span class="tag tag-carbon">碳費</span><span class="tag tag-reg">法規</span>
+          <a class="news-link" href="https://www.cca.gov.tw/affairs/carbon-fee-fund/2301.html" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-top">
+          <div class="news-title"><a href="https://e-info.org.tw/node/239600" target="_blank">全台飲料店禁一次性塑膠杯成效回顧：減少 7.9 億個，2026 年擴及離島</a></div>
+          <div class="news-meta"><span class="news-date">2026年1月起（離島延伸生效）</span><span class="news-source">環境資訊中心</span></div>
+        </div>
+        <div class="news-summary">2024 年 9 月全台連鎖飲料店禁用一次性塑膠杯後，已減少 7.9 億個塑膠杯（減量 17%）。2026 年起政策擴及台灣五個離島縣市，自備杯折扣同步跟進。環境部另規劃推動「杯費分開計價」制度，讓消費者直接感受容器環境成本，持續影響手搖飲、連鎖咖啡業者的容器採購與包材設計方向。</div>
+        <span class="tag tag-reg">法規</span><span class="tag tag-epr">塑膠杯禁令</span>
+        <a class="news-link" href="https://e-info.org.tw/node/239600" target="_blank">🔗 閱讀原文</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== ANALYSIS ==================== -->
+  <div class="analysis-section" id="analysis">
+    <h2>📊 Q1 2026 台灣產業總分析</h2>
+
+    <div class="analysis-grid">
+
+      <div class="analysis-card">
+        <h3>主題熱度排名</h3>
+        <div class="bar-wrap">
+          <div class="bar-row">
+            <span class="bar-label">法規 / 政策</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:90%"></div></div>
+            <span class="bar-count">5</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">rPET 議題</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:75%"></div></div>
+            <span class="bar-count">4</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">包材趨勢</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:60%"></div></div>
+            <span class="bar-count">3</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">鋁蓋 / 鋁罐</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:45%"></div></div>
+            <span class="bar-count">2</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">原物料成本</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:45%"></div></div>
+            <span class="bar-count">2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-card">
+        <h3>關鍵政策事件</h3>
+        <div class="rank-item"><span class="rank-num">1</span><span class="rank-text">塑膠政策轉向：告別全面禁令，改設量化減量目標</span></div>
+        <div class="rank-item"><span class="rank-num">2</span><span class="rank-text">碳費 2026 正式開徵：每噸 NT$300，約 500 家工廠納管</span></div>
+        <div class="rank-item"><span class="rank-num">3</span><span class="rank-text">一次性塑膠杯禁令擴及離島，杯費分開計價規劃中</span></div>
+        <div class="rank-item"><span class="rank-num">4</span><span class="rank-text">rPET 強制含量目標尚無法規，民間持續推動連署倡議</span></div>
+      </div>
+
+      <div class="analysis-card">
+        <h3>對包材選擇的影響</h3>
+        <ul class="insight-list">
+          <li>碳費開徵重塑成本結構，輕量化與 rPET 的 ROI 重新被計算</li>
+          <li>政府補助（最高 500 萬）加速業者評估低碳包材轉型</li>
+          <li>宏全 rPET 一站式解決方案降低導入門檻</li>
+          <li>歐盟 rPET 含量規範對台灣出口導向廠商形成隱性壓力</li>
+          <li>咖啡豆等原料成本上升，間接推動包材端輕量化尋求節流</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <h2 style="font-size:1.1rem; margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.2);">🔭 後續追蹤議題</h2>
+    <div class="watch-grid">
+      <div class="watch-item">
+        <div class="w-title">rPET 強制含量法規</div>
+        <div class="w-desc">環境部、食藥署是否於 2026 下半年正式推出強制 rPET 比例規範</div>
+      </div>
+      <div class="watch-item">
+        <div class="w-title">碳費徵收範圍擴大</div>
+        <div class="w-desc">中小型飲料廠（2.5 萬噸以下）的因應準備與下一波擴大時程</div>
+      </div>
+      <div class="watch-item">
+        <div class="w-title">杯費分開計價立法</div>
+        <div class="w-desc">對手搖飲容器採購與連鎖咖啡杯蓋設計的實質衝擊時間點</div>
+      </div>
+      <div class="watch-item">
+        <div class="w-title">統一、泰山、黑松 rPET 進度</div>
+        <div class="w-desc">主要品牌 rPET 瓶或低碳包材導入的具體時程與規模宣告</div>
+      </div>
+      <div class="watch-item">
+        <div class="w-title">全球咖啡豆 / 鋁原料走勢</div>
+        <div class="w-desc">對台灣飲料業 Q2–Q3 成本結構與定價策略的後續影響</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  台灣飲料與包材產業情報季報 &nbsp;|&nbsp; <span>2026 Q1</span> &nbsp;|&nbsp; 資料僅供內部參考使用
+</footer>
+
+</body>
+</html>
