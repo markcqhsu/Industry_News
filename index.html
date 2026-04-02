@@ -3,9 +3,498 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Industry News</title>
+  <title>飲料包材產業情報季報</title>
+  <style>
+    :root {
+      --primary: #1a3a5c;
+      --accent: #2e86ab;
+      --green: #27ae60;
+      --gray-light: #f5f7fa;
+      --gray-mid: #dce3ed;
+      --text-main: #2c3e50;
+      --text-muted: #6c7a89;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans TC', 'Microsoft JhengHei', 'Segoe UI', sans-serif;
+      background: var(--gray-light);
+      color: var(--text-main);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #0d2340 100%);
+      color: white;
+      padding: 52px 48px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute; top: -80px; right: -60px;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: rgba(46,134,171,0.12);
+    }
+    header::after {
+      content: '';
+      position: absolute; bottom: -100px; left: -50px;
+      width: 250px; height: 250px;
+      border-radius: 50%;
+      background: rgba(46,134,171,0.08);
+    }
+    .header-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+    .header-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    header .subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 28px;
+    }
+    .header-meta {
+      display: flex; gap: 28px; flex-wrap: wrap;
+      font-size: 0.8rem; color: rgba(255,255,255,0.6);
+    }
+    .header-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* ===== REGION TABS ===== */
+    .tab-bar {
+      background: white;
+      border-bottom: 1px solid var(--gray-mid);
+      padding: 0 48px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .tab-list {
+      display: flex;
+      max-width: 1100px;
+      margin: 0 auto;
+      gap: 0;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 16px 22px;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .tab-btn:hover { color: var(--accent); }
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .tab-btn .coming-badge {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: var(--gray-mid);
+      color: var(--text-muted);
+      padding: 1px 6px;
+      border-radius: 8px;
+      text-transform: uppercase;
+    }
+
+    /* ===== MAIN ===== */
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 44px 48px 60px;
+    }
+
+    /* ===== REGION PANEL ===== */
+    .region-panel { display: none; }
+    .region-panel.active { display: block; }
+
+    /* ===== YEAR GROUP ===== */
+    .year-group { margin-bottom: 48px; }
+    .year-heading {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .year-heading::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gray-mid), transparent);
+    }
+
+    /* ===== QUARTER GRID ===== */
+    .quarter-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 900px) { .quarter-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .quarter-grid { grid-template-columns: 1fr; } }
+
+    /* ===== QUARTER CARD ===== */
+    .q-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .q-card.available:hover {
+      box-shadow: 0 8px 32px rgba(46,134,171,0.18);
+      transform: translateY(-3px);
+    }
+    .q-card.coming {
+      opacity: 0.6;
+      box-shadow: none;
+    }
+
+    .q-card-banner {
+      height: 7px;
+      background: var(--gray-mid);
+    }
+    .q-card.available .q-card-banner {
+      background: linear-gradient(90deg, var(--accent), #27ae60);
+    }
+
+    .q-card-body {
+      padding: 22px 22px 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .q-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .q-title {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+    .q-months {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .q-stats {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .q-stat {
+      text-align: center;
+      flex: 1;
+      min-width: 44px;
+    }
+    .q-stat .snum {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .q-stat .slbl {
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .q-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 18px;
+    }
+    .q-tag {
+      font-size: 0.63rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .tag-rpet { background: #c8e6c9; color: #2e7d32; }
+    .tag-reg  { background: #e0f2f1; color: #004d40; }
+    .tag-alum { background: #fff3e0; color: #e65100; }
+    .tag-new  { background: #f3e5f5; color: #6a1b9a; }
+    .tag-pack { background: #e3f2fd; color: #0d47a1; }
+
+    .q-card-footer {
+      padding: 0 22px 20px;
+    }
+    .q-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s;
+    }
+    .q-btn-available {
+      background: var(--accent);
+      color: white;
+    }
+    .q-btn-available:hover { background: #1f6a8a; }
+    .q-btn-coming {
+      background: var(--gray-light);
+      color: var(--text-muted);
+      cursor: default;
+    }
+
+    /* ===== COMING SOON OVERLAY ===== */
+    .q-coming-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .q-coming-label::before {
+      content: '';
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gray-mid);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 28px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--gray-mid);
+      background: white;
+    }
+    footer span { color: var(--accent); }
+
+    /* ===== COMING SOON PAGE ===== */
+    .coming-soon-page {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-muted);
+    }
+    .coming-soon-page .icon { font-size: 3.5rem; margin-bottom: 16px; }
+    .coming-soon-page h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .coming-soon-page p { font-size: 0.9rem; }
+  </style>
 </head>
 <body>
-  <h1>Industry News</h1>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-badge">產業情報 · 季報資料庫 · V1.0.1</div>
+    <h1>飲料與包材產業情報季報</h1>
+    <p class="subtitle">各地區最新飲料包材市場動態、法規政策與產業趨勢彙整</p>
+    <div class="header-meta">
+      <span>📦 主題：PET飲料・包材・鋁蓋・新品・法規</span>
+      <span>🌍 涵蓋地區：東南亞（更多地區陸續上線）</span>
+      <span>📅 更新頻率：每季</span>
+    </div>
+  </div>
+</header>
+
+<!-- REGION TABS -->
+<div class="tab-bar">
+  <div class="tab-list">
+    <button class="tab-btn" data-region="tw">🇹🇼 台灣 <span class="coming-badge">即將上線</span></button>
+    <button class="tab-btn active" data-region="sea">🌏 東南亞</button>
+    <button class="tab-btn" data-region="us">🇺🇸 北美 <span class="coming-badge">即將上線</span></button>
+    <button class="tab-btn" data-region="latam">🌎 中南美洲 <span class="coming-badge">即將上線</span></button>
+    <button class="tab-btn" data-region="eu">🇪🇺 歐洲 <span class="coming-badge">即將上線</span></button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ===== SEA PANEL ===== -->
+  <div class="region-panel active" id="panel-sea">
+
+    <div class="year-group">
+      <div class="year-heading">2026 年</div>
+      <div class="quarter-grid">
+
+        <!-- Q1 — AVAILABLE -->
+        <div class="q-card available">
+          <div class="q-card-banner"></div>
+          <div class="q-card-body">
+            <div class="q-label">東南亞 · 2026</div>
+            <div class="q-title">Q1</div>
+            <div class="q-months">1月 — 3月</div>
+            <div class="q-stats">
+              <div class="q-stat"><span class="snum">8</span><span class="slbl">國家</span></div>
+              <div class="q-stat"><span class="snum">40+</span><span class="slbl">新聞</span></div>
+              <div class="q-stat"><span class="snum">6</span><span class="slbl">分類</span></div>
+            </div>
+            <div class="q-tags">
+              <span class="q-tag tag-rpet">rPET</span>
+              <span class="q-tag tag-reg">EPR法規</span>
+              <span class="q-tag tag-alum">鋁罐/蓋</span>
+              <span class="q-tag tag-new">新品上市</span>
+              <span class="q-tag tag-pack">包材趨勢</span>
+            </div>
+          </div>
+          <div class="q-card-footer">
+            <a class="q-btn q-btn-available" href="reports/SEA/Q1_2026.html" target="_blank">
+              閱讀報告 →
+            </a>
+          </div>
+        </div>
+
+        <!-- Q2 — COMING SOON -->
+        <div class="q-card coming">
+          <div class="q-card-banner"></div>
+          <div class="q-card-body">
+            <div class="q-label">東南亞 · 2026</div>
+            <div class="q-title">Q2</div>
+            <div class="q-months">4月 — 6月</div>
+            <div class="q-coming-label">尚未發布</div>
+          </div>
+          <div class="q-card-footer">
+            <span class="q-btn q-btn-coming">即將推出</span>
+          </div>
+        </div>
+
+        <!-- Q3 — COMING SOON -->
+        <div class="q-card coming">
+          <div class="q-card-banner"></div>
+          <div class="q-card-body">
+            <div class="q-label">東南亞 · 2026</div>
+            <div class="q-title">Q3</div>
+            <div class="q-months">7月 — 9月</div>
+            <div class="q-coming-label">尚未發布</div>
+          </div>
+          <div class="q-card-footer">
+            <span class="q-btn q-btn-coming">即將推出</span>
+          </div>
+        </div>
+
+        <!-- Q4 — COMING SOON -->
+        <div class="q-card coming">
+          <div class="q-card-banner"></div>
+          <div class="q-card-body">
+            <div class="q-label">東南亞 · 2026</div>
+            <div class="q-title">Q4</div>
+            <div class="q-months">10月 — 12月</div>
+            <div class="q-coming-label">尚未發布</div>
+          </div>
+          <div class="q-card-footer">
+            <span class="q-btn q-btn-coming">即將推出</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== OTHER REGION PANELS (coming soon) ===== -->
+  <div class="region-panel" id="panel-tw">
+    <div class="coming-soon-page">
+      <div class="icon">🇹🇼</div>
+      <h2>台灣季報</h2>
+      <p>此地區報告正在建置中，敬請期待。</p>
+    </div>
+  </div>
+  <div class="region-panel" id="panel-latam">
+    <div class="coming-soon-page">
+      <div class="icon">🌎</div>
+      <h2>中南美洲季報</h2>
+      <p>此地區報告正在建置中，敬請期待。</p>
+    </div>
+  </div>
+  <div class="region-panel" id="panel-eu">
+    <div class="coming-soon-page">
+      <div class="icon">🇪🇺</div>
+      <h2>歐洲季報</h2>
+      <p>此地區報告正在建置中，敬請期待。</p>
+    </div>
+  </div>
+  <div class="region-panel" id="panel-us">
+    <div class="coming-soon-page">
+      <div class="icon">🇺🇸</div>
+      <h2>北美季報</h2>
+      <p>此地區報告正在建置中，敬請期待。</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  飲料與包材產業情報季報 &nbsp;|&nbsp; <span>Industry Intelligence Hub</span> &nbsp;|&nbsp; 資料僅供內部參考使用
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.region-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const region = tab.dataset.region;
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + region).classList.add('active');
+    });
+  });
+</script>
+
 </body>
 </html>
