@@ -360,16 +360,13 @@
       font-size: 0.88rem;
       color: rgba(255,255,255,0.9);
       border-bottom: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      gap: 10px;
     }
     .insight-list li::before {
       content: '▸';
       color: var(--accent);
-      flex-shrink: 0;
+      margin-right: 6px;
     }
     .insight-list li:last-child { border-bottom: none; }
-    .insight-list li strong { white-space: nowrap; }
 
     .watch-grid {
       display: grid;
@@ -458,10 +455,7 @@
       .watch-grid { grid-template-columns: 1fr 1fr; }
       .analysis-section h2 { font-size: 1.1rem; }
       .analysis-card { padding: 16px; }
-      /* insight-list 改 block：標籤與內文自然換行，不擠壓 */
-      .insight-list li { display: block; padding: 10px 0; font-size: 0.92rem; }
-      .insight-list li::before { display: inline; margin-right: 6px; }
-      .insight-list li strong { white-space: normal; }
+      .insight-list li { padding: 10px 0; font-size: 0.92rem; }
       .rank-text { font-size: 0.92rem; line-height: 1.6; }
       .watch-item .w-title { font-size: 0.88rem; }
       .watch-item .w-desc { font-size: 0.82rem; }
@@ -563,101 +557,17 @@
       <!-- PET -->
       <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
 
-      <div class="news-card has-img">
-        <div class="news-img">
-          <img src="https://www.recyclingtoday.com/fileuploads/image/2023/05/02/pepsithailandweb.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="news-img-fallback img-rpet" style="display:none">
-            <span class="news-img-icon">♻️</span>
-            <span class="news-img-label">rPET 瓶</span>
-          </div>
-        </div>
-        <div class="news-body">
-          <div class="news-card-top">
-            <div class="news-title"><a href="https://www.recyclingtoday.com/news/pepsi-suntory-thailand-plastic-bottle-recycling-pet/" target="_blank">PepsiCo Suntory Thailand – 100% rPET Bottle Portfolio Expansion</a></div>
-            <div class="news-meta"><span class="news-date">2026年Q1</span><span class="news-source">Recycling Today / ThaiPR.NET</span></div>
-          </div>
-          <div class="news-summary">百事可樂旗下的 Suntory PepsiCo Beverage（Thailand）持續擴展 100% rPET 瓶產品組合，包括 Pepsi（550ml、1,450ml）及 TEA+ 烏龍茶即飲系列。此外，公司連續第四年提供 PET 回收箱給曼谷市政府，支持城市塑膠回收基礎建設。100% rPET 瓶已通過泰國 FDA 認證，代表食品安全合規的進一步提升。此舉強化了泰國飲料市場「瓶對瓶」循環經濟模式，對 rPET 採購與 PET 瓶設計具直接參考價值。</div>
-          <span class="tag tag-rpet">rPET</span><span class="tag tag-pet">PET瓶</span>
-          <a class="news-link" href="https://www.recyclingtoday.com/news/pepsi-suntory-thailand-plastic-bottle-recycling-pet/" target="_blank">🔗 閱讀原文</a>
-        </div>
-      </div>
-
-      <div class="news-card has-img">
-        <div class="news-img">
-          <div class="news-img-fallback img-rpet">
-            <span class="news-img-icon">🍶</span>
-            <span class="news-img-label">Coca-Cola rPET</span>
-          </div>
-        </div>
-        <div class="news-body">
-          <div class="news-card-top">
-            <div class="news-title"><a href="https://recyclinginternational.com/business/thailand-gets-first-100-recycled-pet-bottles/55213/" target="_blank">Coca-Cola ThaiNamthip – rPET Bottle Portfolio Across Multiple Sizes</a></div>
-            <div class="news-meta"><span class="news-date">2025–2026持續</span><span class="news-source">Recycling International / Bangkok Post</span></div>
-          </div>
-          <div class="news-summary">可口可樂旗下 ThaiNamthip 將 100% rPET 瓶延伸至 300ml 及 510ml 規格，所有產品採用 ENVICCO 認證回收材料、經泰國 FDA 認可。這是可口可樂「無廢世界（World Without Waste）」策略的一部分，目標 2030 年前所有包裝含 50% 回收材料。此案例顯示泰國大型飲料品牌已從 1L 規格向小容量延伸，代表 rPET 應用全線滲透。</div>
-          <span class="tag tag-rpet">rPET</span><span class="tag tag-pet">PET瓶</span>
-        </div>
-      </div>
+      <div class="no-news">本期未找到 Q1 2026 高度相關新聞</div>
 
       <!-- PACKAGING -->
       <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
 
-      <div class="news-card has-img">
-        <div class="news-img">
-          <div class="news-img-fallback img-factory">
-            <span class="news-img-icon">🏭</span>
-            <span class="news-img-label">Indorama Ventures</span>
-          </div>
-        </div>
-        <div class="news-body">
-          <div class="news-card-top">
-            <div class="news-title"><a href="https://www.indoramaventures.com/en/updates/other-release/1395/thai-based-global-company-recycles-50-billion-pet-beverage-bottles-in-a-decade-indorama-ventures-aims-to-recycle-50-billion-bottles-per-year-by-2025" target="_blank">Indorama Ventures – 食品級 rPET 產線擴產（泰國）</a></div>
-            <div class="news-meta"><span class="news-date">2026年Q1</span><span class="news-source">Indorama Ventures / InterPlast</span></div>
-          </div>
-          <div class="news-summary">印多拉馬公司（全球最大 PET 樹脂生產商，總部泰國）於 2025 年底啟動 5 萬公噸食品級 rPET 生產線，2026 年進入爬升期，帶動東南亞 rPET 原料供應量大幅增加。加上 2026–2028 年商業計畫聚焦成本領先與產品組合優化，預計將使 rPET 供貨價格更具競爭力。對飲料包材供應商而言，採購 rPET 的成本門檻有望降低，是推動業界提升回收含量的重要驅動力。</div>
-          <span class="tag tag-rpet">rPET供應</span>
-          <a class="news-link" href="https://www.indoramaventures.com" target="_blank">🔗 閱讀原文</a>
-        </div>
-      </div>
-
-      <div class="news-card has-img">
-        <div class="news-img">
-          <div class="news-img-fallback img-market">
-            <span class="news-img-icon">🎪</span>
-            <span class="news-img-label">ProPak Asia 2026</span>
-          </div>
-        </div>
-        <div class="news-body">
-          <div class="news-card-top">
-            <div class="news-title"><a href="https://www.propakasia.com/" target="_blank">ProPak Asia 2026 – 國際包裝技術展（Bangkok）</a></div>
-            <div class="news-meta"><span class="news-date">2026年6月10–13日（業界關注展前動向）</span><span class="news-source">ProPak Asia / Informa</span></div>
-          </div>
-          <div class="news-summary">第 33 屆 ProPak Asia 於 2026 年 6 月在曼谷 IMPACT 展覽中心舉行，預計吸引 45 國、2,500 品牌及 8 萬名訪客。展覽重點包含全球包裝論壇與飲料高峰論壇，Sidel 將展示 IntelliADJUST™ PET 瓶品質控制系統以支援 rPET 應用。Q1 期間已引發業界熱議與報名活動，代表包裝技術採購決策在年初已密集進行。</div>
-          <span class="tag tag-pet">包裝設備</span>
-          <a class="news-link" href="https://www.propakasia.com/" target="_blank">🔗 閱讀原文</a>
-        </div>
-      </div>
+      <div class="no-news">本期未找到 Q1 2026 高度相關新聞</div>
 
       <!-- ALUMINUM CAP -->
       <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋 / 金屬蓋</div>
 
-      <div class="news-card has-img">
-        <div class="news-img">
-          <img src="https://www.cantechonline.com/wp-content/uploads/Thailand-1.jpeg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="news-img-fallback img-alum" style="display:none">
-            <span class="news-img-icon">🥤</span>
-            <span class="news-img-label">Slim Can 鋁罐</span>
-          </div>
-        </div>
-        <div class="news-body">
-          <div class="news-card-top">
-            <div class="news-title"><a href="https://www.cantechonline.com/feature/30121/thailands-vibrant-can-packaging-industry/" target="_blank">泰國鋁罐產業擴產——Crown、Asia Can Manufacturing</a></div>
-            <div class="news-meta"><span class="news-date">2026年Q1</span><span class="news-source">CanTech International / ASI</span></div>
-          </div>
-          <div class="news-summary">Crown 公司在 2026 年擴增泰國細長罐（Slim Can）產能，主要對應能量飲料需求。Asia Can Manufacturing 亦新增生產線，目標年產能達 10 億罐。泰國最大飲料集團 ThaiBev 報告 2026 年較 2020 年已減少鋁用量 2,583 公噸，並設定到 2030 年再減 2,700 公噸的目標，顯示輕量化設計是罐蓋產業的主流趨勢。</div>
-          <span class="tag tag-alum">鋁罐/蓋</span><span class="tag tag-pet">輕量化</span>
-        </div>
-      </div>
+      <div class="no-news">本期未找到 Q1 2026 高度相關新聞</div>
 
       <!-- NEW PRODUCTS -->
       <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
@@ -695,24 +605,6 @@
       <!-- REGULATION -->
       <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
 
-      <div class="news-card has-img">
-        <div class="news-img">
-          <img src="https://www.aljazeera.com/wp-content/uploads/2025/01/AP19171183295781-1736691519.jpg?resize=1200%2C630" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="news-img-fallback img-reg" style="display:none">
-            <span class="news-img-icon">🚫</span>
-            <span class="news-img-label">塑料進口禁令</span>
-          </div>
-        </div>
-        <div class="news-body">
-          <div class="news-card-top">
-            <div class="news-title"><a href="https://www.aljazeera.com/news/2025/1/14/what-is-waste-colonialism-and-why-has-thailand-banned-imports-of-plastic" target="_blank">泰國 2026 年起全面禁止進口塑料廢棄物</a></div>
-            <div class="news-meta"><span class="news-date">2026年1月</span><span class="news-source">Al Jazeera / Earth.org</span></div>
-          </div>
-          <div class="news-summary">泰國自 2026 年 1 月起正式實施塑料廢棄物進口禁令，為多年分階段政策（每年減少 20%進口）的最後一步，完成全面禁止。此法令將迫使國內飲料業更加依賴本地回收體系，進一步推動泰國 rPET 本地收集與加工能力的建立。</div>
-          <span class="tag tag-reg">法規</span><span class="tag tag-epr">禁令</span>
-          <a class="news-link" href="https://www.aljazeera.com/news/2025/1/14/what-is-waste-colonialism-and-why-has-thailand-banned-imports-of-plastic" target="_blank">🔗 閱讀原文</a>
-        </div>
-      </div>
 
       <div class="news-card">
         <div class="news-card-top">
@@ -768,15 +660,7 @@
 
       <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
 
-      <div class="news-card">
-        <div class="news-card-top">
-          <div class="news-title"><a href="https://www.propakvietnam.com/" target="_blank">ProPak Vietnam 2026 & DrinkTech Vietnam 2026 展覽（胡志明市）</a></div>
-          <div class="news-meta"><span class="news-date">2026年3月31日–4月2日</span><span class="news-source">Vietnam News / VnExpress</span></div>
-        </div>
-        <div class="news-summary">第 19 屆 ProPak Vietnam 及第 3 屆 DrinkTech Vietnam 於 2026 年 3 月底舉行，吸引 32 國、450 家以上展商，涵蓋 PET 瓶技術、飲料包裝解決方案、灌裝設備與永續包裝創新。Heineken Vietnam、TOMRA、SIG 等大廠均出席，顯示越南包材市場的高度國際化競爭態勢。展會時序緊貼 Q1 末，是業界採購與供應商接觸的重要窗口。</div>
-        <span class="tag tag-pet">包裝展</span>
-        <a class="news-link" href="https://www.propakvietnam.com/" target="_blank">🔗 閱讀原文</a>
-      </div>
+      <div class="no-news">本期未找到 Q1 2026 高度相關新聞</div>
 
       <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋 / 金屬蓋</div>
 
@@ -800,42 +684,7 @@
 
       <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
 
-      <div class="news-card has-img">
-        <div class="news-img">
-          <div class="news-img-fallback img-reg">
-            <span class="news-img-icon">⚖️</span>
-            <span class="news-img-label">越南塑料禁令</span>
-          </div>
-        </div>
-        <div class="news-body">
-          <div class="news-card-top">
-            <div class="news-title"><a href="https://en.mae.gov.vn/hanoi-to-ban-singleuse-plastics-in-hotels-by-2026-8953.htm" target="_blank">越南 2026 年元旦起禁止生產與進口特定塑料袋</a></div>
-            <div class="news-meta"><span class="news-date">2026年1月1日生效</span><span class="news-source">Vietnam Ministry of Environment / World Bank</span></div>
-          </div>
-          <div class="news-summary">越南自 2026 年 1 月 1 日起禁止生產與進口厚度 ≤ 50 微米的難降解塑料袋，河內市旅館禁止使用一次性塑料（含瓶裝水）。延伸生產者責任（EPR）制度要求飲料製造商達到特定回收比例或繳納環保基金。此法規對飲料包裝材料選擇（傾向可回收 PET 或生物降解材料）及標籤設計均有直接影響。</div>
-          <span class="tag tag-reg">法規</span><span class="tag tag-epr">EPR</span>
-          <a class="news-link" href="https://en.mae.gov.vn/hanoi-to-ban-singleuse-plastics-in-hotels-by-2026-8953.htm" target="_blank">🔗 閱讀原文</a>
-        </div>
-      </div>
-
-      <div class="news-card has-img">
-        <div class="news-img">
-          <img src="https://mediaen.vietnamplus.vn/images/f579a678cf9e90879541752073c260053d44b205b85ac182c04abf6c8b64fb76f6d8e68940ee49681b969842dd19b6647990a9ef8e4c0f9d2a8892b693160dda526fbd24011ae45b2ef912f4252e5e96/431225-nguyen-hung-thinh.jpg.webp" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="news-img-fallback img-market" style="display:none">
-            <span class="news-img-icon">📊</span>
-            <span class="news-img-label">越南 DRS 研究</span>
-          </div>
-        </div>
-        <div class="news-body">
-          <div class="news-card-top">
-            <div class="news-title"><a href="https://en.vietnamplus.vn/vietnam-could-cut-77000-tonnes-of-packaging-waste-annually-with-deposit-return-system-study-post321183.vnp" target="_blank">研究：越南若實施押金回收制度，每年可減少 7.7 萬噸包裝廢棄物</a></div>
-            <div class="news-meta"><span class="news-date">2026年</span><span class="news-source">Vietnam+ / World Bank / Eunomia Research</span></div>
-          </div>
-          <div class="news-summary">一份研究提議越南對 PET 瓶與鋁罐實施強制押金回收制度（DRS），每件押金 1,000–2,000 越南盾。PET 瓶佔單次使用飲料容器的 33%，鋁罐佔 65%（合計 98%），推行 DRS 可將包裝廢棄物年減 7.7 萬噸。此研究結果將直接影響越南政府的未來立法方向，對飲料業的容器設計與材料選擇有深遠影響。</div>
-          <span class="tag tag-reg">政策倡議</span><span class="tag tag-pet">PET回收</span><span class="tag tag-alum">鋁罐</span>
-          <a class="news-link" href="https://en.vietnamplus.vn/vietnam-could-cut-77000-tonnes-of-packaging-waste-annually-with-deposit-return-system-study-post321183.vnp" target="_blank">🔗 閱讀原文</a>
-        </div>
-      </div>
+      <div class="no-news">本期未找到 Q1 2026 高度相關新聞</div>
 
       <div class="category-label"><span class="cat-dot dot-raw"></span>原物料</div>
 
@@ -864,25 +713,7 @@
 
       <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
 
-      <div class="news-card">
-        <div class="news-card-top">
-          <div class="news-title"><a href="https://www.recycling-magazine.com/2024/04/04/recycled-pet-for-coca-colas-first-100-rpet-bottles-in-indonesia/" target="_blank">Coca-Cola 印尼推出首批 100% rPET 飲料瓶（持續至 2026）</a></div>
-          <div class="news-meta"><span class="news-date">2024–2026持續</span><span class="news-source">Recycling Magazine / PT Amandina Bumi Nusantara</span></div>
-        </div>
-        <div class="news-summary">可口可樂在印尼推出涵蓋可樂、雪碧、芬達的 100% rPET 瓶，當地回收合作夥伴 PT Amandina Bumi Nusantara 每月處理 3,000 噸回收 PET。此計畫在六個月內減少 12,000 噸新 PET 進口，推動印尼本地回收與再生料供應鏈持續升級，2026 年相關措施仍持續深化。</div>
-        <span class="tag tag-rpet">rPET</span><span class="tag tag-pet">PET瓶</span>
-        <a class="news-link" href="https://www.recycling-magazine.com/2024/04/04/recycled-pet-for-coca-colas-first-100-rpet-bottles-in-indonesia/" target="_blank">🔗 閱讀原文</a>
-      </div>
-
-      <div class="news-card">
-        <div class="news-card-top">
-          <div class="news-title"><a href="https://www.indoramaventures.com/en/updates/other-release/1787/new-karawang-facility-to-recycle-2-billion-pet-plastic-bottles-annually" target="_blank">Indorama Ventures 卡拉旺新廠——年回收 19.2 億個 PET 瓶（Q4 2026 完工）</a></div>
-          <div class="news-meta"><span class="news-date">2025–2026建設中</span><span class="news-source">Indorama Ventures</span></div>
-        </div>
-        <div class="news-summary">印多拉馬公司在印尼西爪哇卡拉旺建設新 PET 回收工廠，年處理能力 3 萬噸（約 19.2 億個瓶），預計 2026 年第四季完工投產。此廠採「瓶對瓶」（Bottle-to-Bottle）技術，生產食品級 rPET，將大幅支援印尼飲料產業的永續包裝目標，並對本地 rPET 原料供應形成重要補充。</div>
-        <span class="tag tag-rpet">rPET供應</span>
-        <a class="news-link" href="https://www.indoramaventures.com/en/updates/other-release/1787/new-karawang-facility-to-recycle-2-billion-pet-plastic-bottles-annually" target="_blank">🔗 閱讀原文</a>
-      </div>
+      <div class="no-news">本期未找到 Q1 2026 高度相關新聞</div>
 
       <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
 
@@ -910,15 +741,7 @@
 
       <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
 
-      <div class="news-card">
-        <div class="news-card-top">
-          <div class="news-title"><a href="https://bingxueindonesia.co.id/grand-opening-bingxue-maret-2026/" target="_blank">Grand Opening Bingxue Maret 2026: Hadir di 9 Lokasi Baru（印尼文）</a></div>
-          <div class="news-meta"><span class="news-date">2026年3月</span><span class="news-source">Bingxue Indonesia</span></div>
-        </div>
-        <div class="news-summary">冷飲品牌賓雪（Bingxue）在 2026 年 3 月於印尼 9 個新地點同步開業，採用現代包裝設計與永續材料理念。這標誌著該品牌（原興於中國）在印尼市場的積極擴張，也反映了印尼消費者對創新乳製品冷飲包裝的高度接受度。</div>
-        <span class="tag tag-new">新品展店</span>
-        <a class="news-link" href="https://bingxueindonesia.co.id/grand-opening-bingxue-maret-2026/" target="_blank">🔗 閱讀原文（印尼文）</a>
-      </div>
+      <div class="no-news">本期未找到 Q1 2026 高度相關新聞</div>
 
       <div class="category-label"><span class="cat-dot dot-raw"></span>原物料</div>
 
@@ -933,44 +756,7 @@
 
       <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
 
-      <div class="news-card has-img">
-        <div class="news-img">
-          <img src="https://baliexpat.com/wp-content/uploads/2025/07/Plastic.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="news-img-fallback img-reg" style="display:none;background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #388e3c 100%);">
-            <span class="news-img-icon">🏝️</span>
-            <span class="news-img-label">峇里島禁令</span>
-          </div>
-        </div>
-        <div class="news-body">
-          <div class="news-card-top">
-            <div class="news-title"><a href="https://baliexpat.com/2025/07/17/after-plastic-bottle-ban-bali-to-prohibit-sachet-packaging-by-2026/" target="_blank">峇里島 2026 年禁止小袋塑料包裝（繼 1 升以下塑料瓶禁令後）</a></div>
-            <div class="news-meta"><span class="news-date">2026年</span><span class="news-source">Bali Expat</span></div>
-          </div>
-          <div class="news-summary">峇里島政府 2025 年已禁止 1 升以下一次性塑料瓶，2026 年進一步將禁令擴大至小袋塑料包裝（Sachets），目標 2027 年實現「無廢棄物島」。島上年產 30 萬噸塑料廢棄物，超過 50% 未被收集，此政策迫使飲料品牌尋求可重複使用或更易回收的包裝替代方案，對零售飲料的現有小包裝格式影響明顯。</div>
-          <span class="tag tag-reg">法規禁令</span>
-          <a class="news-link" href="https://baliexpat.com/2025/07/17/after-plastic-bottle-ban-bali-to-prohibit-sachet-packaging-by-2026/" target="_blank">🔗 閱讀原文</a>
-        </div>
-      </div>
-
-      <div class="news-card">
-        <div class="news-card-top">
-          <div class="news-title"><a href="https://www.foodnavigator-asia.com/Article/2024/06/05/indonesia-formalises-new-regulations-mandating-bpa-leaching-warnings-on-water-bottles" target="_blank">印尼 BPOM 強制規定 PET 瓶裝水必須標示 BPA 滲漏警告</a></div>
-          <div class="news-meta"><span class="news-date">2024年頒布 / 2028年前合規</span><span class="news-source">Food Navigator Asia</span></div>
-        </div>
-        <div class="news-summary">印尼食品藥品監督部門（BPOM）發佈新規，要求所有 PET 瓶裝飲用水必須標示雙酚 A（BPA）滲漏警告及儲存說明，廠商有 4 年緩衝期（至 2028 年）完成標籤更新。此法規 2026 年已進入過渡合規期，對包材設計、標籤印刷及生產流程均有直接成本影響。</div>
-        <span class="tag tag-reg">法規</span>
-        <a class="news-link" href="https://www.foodnavigator-asia.com/Article/2024/06/05/indonesia-formalises-new-regulations-mandating-bpa-leaching-warnings-on-water-bottles" target="_blank">🔗 閱讀原文</a>
-      </div>
-
-      <div class="news-card">
-        <div class="news-card-top">
-          <div class="news-title"><a href="https://mediaindonesia.com/humaniora/858061/peringati-hpsn-2026-kolaborasi-daur-ulang-pet-diperkuat-di-ibu-kota-nusantara" target="_blank">Peringati HPSN 2026, Kolaborasi Daur Ulang PET Diperkuat di Ibu Kota Nusantara（印尼文）</a></div>
-          <div class="news-meta"><span class="news-date">2026年</span><span class="news-source">Media Indonesia</span></div>
-        </div>
-        <div class="news-summary">印尼在 2026 年「全國垃圾關注日（HPSN）」期間，於新首都努桑塔拉強化 PET 瓶回收合作。國家循環經濟運動（GESN）過去五年已累計收集超過 5 萬噸回收 PET，並部署反向售貨機（RVM）拓展回收網絡。此舉顯示印尼政府持續推動 PET 循環經濟基礎設施建設。</div>
-        <span class="tag tag-reg">回收政策</span><span class="tag tag-rpet">rPET</span>
-        <a class="news-link" href="https://mediaindonesia.com/humaniora/858061/peringati-hpsn-2026-kolaborasi-daur-ulang-pet-diperkuat-di-ibu-kota-nusantara" target="_blank">🔗 閱讀原文（印尼文）</a>
-      </div>
+      <div class="no-news">本期未找到 Q1 2026 高度相關新聞</div>
 
     </div>
   </div>
@@ -987,25 +773,7 @@
 
       <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
 
-      <div class="news-card">
-        <div class="news-card-top">
-          <div class="news-title"><a href="https://www.thestar.com.my/news/nation/2023/12/18/coca-cola-introduces-100-recycled-plastic-pet-bottles-for-the-first-time-in-malaysia" target="_blank">Coca-Cola 馬來西亞推出 100% rPET 瓶（持續至 2026 年深化）</a></div>
-          <div class="news-meta"><span class="news-date">2023推出 / 2026延續</span><span class="news-source">The Star / ChemAnalyst</span></div>
-        </div>
-        <div class="news-summary">可口可樂馬來西亞推出首批 100% 回收 PET 飲料瓶（500ml 可口可樂原味與零糖），是品牌全球 2030 年目標的一部分（包裝含 50% 以上回收材料）。2026 年此項目持續擴展至更多規格，帶動馬來西亞飲料市場對 rPET 的主流採用。</div>
-        <span class="tag tag-rpet">rPET</span><span class="tag tag-pet">PET瓶</span>
-        <a class="news-link" href="https://www.thestar.com.my/news/nation/2023/12/18/coca-cola-introduces-100-recycled-plastic-pet-bottles-for-the-first-time-in-malaysia" target="_blank">🔗 閱讀原文</a>
-      </div>
-
-      <div class="news-card">
-        <div class="news-card-top">
-          <div class="news-title">FENC 馬六甲食品級 rPET 樹脂生產線擴建</div>
-          <div class="news-meta"><span class="news-date">2025–2026投產</span><span class="news-source">ChemAnalyst / FENC Corporation</span></div>
-        </div>
-        <div class="news-summary">遠東新世紀（FENC）旗下 FE Green PET (M) SDN BHD 在馬六甲建設年產 5 萬公噸食品級 rPET 樹脂生產線，供應馬來西亞及東南亞食品飲料企業。此投資直接提升區域 rPET 原料供應量，降低飲料廠商採購進口 rPET 的依賴，對整個東南亞包材供應鏈具戰略意義。</div>
-        <span class="tag tag-rpet">rPET供應</span>
-        <a class="news-link" href="https://www.chemanalyst.com/NewsAndDeals/NewsDetails/fenc-starts-construction-on-expansion-of-green-pet-production-facility-27464" target="_blank">🔗 閱讀原文</a>
-      </div>
+      <div class="no-news">本期未找到 Q1 2026 高度相關新聞</div>
 
       <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
 
@@ -1113,15 +881,7 @@
 
       <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
 
-      <div class="news-card">
-        <div class="news-card-top">
-          <div class="news-title"><a href="https://packagingeurope.com/news/100-rpet-bottles-and-new-sustainable-packaging-platform-revealed-by-coca-cola-philippines/10420.article" target="_blank">Coca-Cola Philippines 推出 100% rPET 瓶及可持續包裝平台</a></div>
-          <div class="news-meta"><span class="news-date">2026年1月</span><span class="news-source">Packaging Europe</span></div>
-        </div>
-        <div class="news-summary">可口可樂菲律賓公司宣佈推出 100% 回收 PET 飲料瓶，並同步揭露全新的「可持續包裝平台」，展現其在菲律賓市場對循環經濟的承諾。此舉預計將帶動菲律賓其他飲料製造商跟進採用 rPET，推動整體行業向環保包裝轉型，對本地 rPET 採購與加工產業形成拉力。</div>
-        <span class="tag tag-rpet">rPET</span><span class="tag tag-pet">PET瓶</span>
-        <a class="news-link" href="https://packagingeurope.com/news/100-rpet-bottles-and-new-sustainable-packaging-platform-revealed-by-coca-cola-philippines/10420.article" target="_blank">🔗 閱讀原文</a>
-      </div>
+      <div class="no-news">本期未找到 Q1 2026 高度相關新聞</div>
 
       <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
 
@@ -1136,23 +896,7 @@
 
       <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
 
-      <div class="news-card has-img">
-        <div class="news-img">
-          <div class="news-img-fallback img-reg" style="background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #1976d2 100%);">
-            <span class="news-img-icon">✅</span>
-            <span class="news-img-label">菲律賓 EPR 達標</span>
-          </div>
-        </div>
-        <div class="news-body">
-          <div class="news-card-top">
-            <div class="news-title"><a href="https://sustainability.chemlinked.com/news/philippines-surpasses-2025-plastic-waste-recovery-targets-under-epr-law" target="_blank">Philippines Surpasses 2025 Plastic Waste Recovery Targets Under EPR Law</a></div>
-            <div class="news-meta"><span class="news-date">2026年1月30日</span><span class="news-source">ChemLinked</span></div>
-          </div>
-          <div class="news-summary">菲律賓環境自然資源部宣布：2025 年全國塑料回收轉移率達 55.98%，超越 40% 的法定目標。硬質塑料回收率達 55.60%，截至 2026 年 1 月已有 1,017 個實體完成 201 個 EPR 項目登記。此超標表現顯示菲律賓 EPR 法律執行力強，對飲料包材供應商而言，合規性要求已從政策轉為市場實質驅動力。</div>
-          <span class="tag tag-reg">法規</span><span class="tag tag-epr">EPR達標</span>
-          <a class="news-link" href="https://sustainability.chemlinked.com/news/philippines-surpasses-2025-plastic-waste-recovery-targets-under-epr-law" target="_blank">🔗 閱讀原文</a>
-        </div>
-      </div>
+      <div class="no-news">本期未找到 Q1 2026 高度相關新聞</div>
 
       <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋</div>
       <div class="no-news">本期未找到高度相關新聞</div>
@@ -1260,15 +1004,6 @@
         </div>
       </div>
 
-      <div class="news-card">
-        <div class="news-card-top">
-          <div class="news-title"><a href="https://www.khmertimeskh.com/501513984/coca-cola-cambodia-beverage-company-strengthens-commitment-to-sustainability-in-cambodia/" target="_blank">Coca-Cola Cambodia – Dasani 350ml 推出 100% rPET 瓶</a></div>
-          <div class="news-meta"><span class="news-date">2026年</span><span class="news-source">Khmer Times</span></div>
-        </div>
-        <div class="news-summary">可口可樂柬埔寨公司推出 Dasani 350ml 瓶裝水，使用 100% 回收 PET 塑料（瓶蓋與標籤除外），新設計標籤長度縮短 60%。每年可節省 1,200 公噸新塑料，預計 2030 年前達到主要包裝 50% 回收含量目標。此案例是柬埔寨市場主流飲料品牌首次明確落地 rPET 應用的標竿案例。</div>
-        <span class="tag tag-rpet">rPET</span><span class="tag tag-new">新包裝</span>
-        <a class="news-link" href="https://www.khmertimeskh.com/501513984/coca-cola-cambodia-beverage-company-strengthens-commitment-to-sustainability-in-cambodia/" target="_blank">🔗 閱讀原文</a>
-      </div>
 
       <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
 
@@ -1284,23 +1019,7 @@
 
       <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
 
-      <div class="news-card has-img">
-        <div class="news-img">
-          <div class="news-img-fallback img-reg">
-            <span class="news-img-icon">🗺️</span>
-            <span class="news-img-label">柬埔寨塑料路線圖</span>
-          </div>
-        </div>
-        <div class="news-body">
-          <div class="news-card-top">
-            <div class="news-title"><a href="https://www.khmertimeskh.com/501830582/cambodia-launches-national-roadmap-to-cut-plastic-pollution-and-build-circular-economy/" target="_blank">Cambodia Launches National Plastic Action Roadmap to Reduce Pollution and Build Circular Economy</a></div>
-            <div class="news-meta"><span class="news-date">2026年1月20日</span><span class="news-source">Khmer Times / UNDP</span></div>
-          </div>
-          <div class="news-summary">柬埔寨環境部於 2026 年 1 月 20 日發佈「循環塑料經濟路線圖」，目標 2040 年將塑料污染減少 74%，循環經濟比例提升至 52%。路線圖預計創造約 26,000 個廢物管理與回收行業就業機會。對飲料包材企業而言，此路線圖將是柬埔寨未來 15 年包裝材料政策的重要指引，rPET 與可回收包材將獲得政策支持。</div>
-          <span class="tag tag-reg">法規路線圖</span><span class="tag tag-epr">循環經濟</span>
-          <a class="news-link" href="https://www.khmertimeskh.com/501830582/cambodia-launches-national-roadmap-to-cut-plastic-pollution-and-build-circular-economy/" target="_blank">🔗 閱讀原文</a>
-        </div>
-      </div>
+      <div class="no-news">本期連結無法存取</div>
 
       <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋</div>
       <div class="no-news">本期未找到高度相關新聞</div>
@@ -1323,27 +1042,11 @@
 
       <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
 
-      <div class="news-card">
-        <div class="news-card-top">
-          <div class="news-title"><a href="https://www.amchammyammer.com/member-news/coca-cola-myanmar-introduces-industry-first-beverage-bottles-made-100-recycled-plastic" target="_blank">Coca-Cola Myanmar Introduces Industry-First 100% Recycled Plastic Beverage Bottles</a></div>
-          <div class="news-meta"><span class="news-date">2026年</span><span class="news-source">American Chamber of Commerce Myanmar</span></div>
-        </div>
-        <div class="news-summary">可口可樂緬甸及其本地灌裝合作夥伴推出 500ml 瓶裝可樂，採用 100% 回收塑料（瓶蓋與標籤除外），創造緬甸飲料包裝業的首例。每年可節省 1,200 公噸新塑料，是緬甸飲料行業在環保包裝上的重要里程碑，也代表本地 rPET 回收體系正獲得主流品牌的實際支持。</div>
-        <span class="tag tag-rpet">rPET首例</span><span class="tag tag-pet">PET瓶</span>
-        <a class="news-link" href="https://www.amchammyammer.com/member-news/coca-cola-myanmar-introduces-industry-first-beverage-bottles-made-100-recycled-plastic" target="_blank">🔗 閱讀原文</a>
-      </div>
+      <div class="no-news">本期連結無法存取</div>
 
       <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
 
-      <div class="news-card">
-        <div class="news-card-top">
-          <div class="news-title"><a href="https://www.sipasolutions.com/en/case-histories/consumers-goods-myanmar-leads-the-beverage-market-with-sipa" target="_blank">Consumer Goods Myanmar – SIPA 設備投資，PET 瓶本地生產能力升級</a></div>
-          <div class="news-meta"><span class="news-date">2026年</span><span class="news-source">SIPA Solutions</span></div>
-        </div>
-        <div class="news-summary">緬甸消費品公司投資 SIPA 設備，配置兩台 XFORM 500/128 預成型系統與三台 SFR 24 EVO3 旋轉吹瓶機，PET 瓶年產能達 4.8 萬瓶/小時。產品覆蓋 250ml 熱灌裝飲料到 1 升礦泉水，代表緬甸本地飲料業在 PET 瓶自製能力上的現代化升級，有助於降低包材進口依賴。</div>
-        <span class="tag tag-pet">PET設備</span>
-        <a class="news-link" href="https://www.sipasolutions.com/en/case-histories/consumers-goods-myanmar-leads-the-beverage-market-with-sipa" target="_blank">🔗 閱讀原文</a>
-      </div>
+      <div class="no-news">本期連結無法存取</div>
 
       <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋</div>
       <div class="no-news">本期未找到高度相關新聞</div>
