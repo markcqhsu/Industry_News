@@ -293,9 +293,7 @@
       .watch-grid { grid-template-columns: 1fr 1fr; }
       .analysis-section h2 { font-size: 1.1rem; }
       .analysis-card { padding: 16px; }
-      .insight-list li { display: block; padding: 10px 0; font-size: 0.92rem; }
-      .insight-list li::before { display: inline; margin-right: 6px; }
-      .insight-list li strong { white-space: normal; }
+      .insight-list li { padding: 10px 0; font-size: 0.92rem; }
       .rank-text { font-size: 0.92rem; line-height: 1.6; }
       .watch-item .w-title { font-size: 0.88rem; }
       .watch-item .w-desc { font-size: 0.82rem; }
@@ -370,11 +368,9 @@
       padding: 8px 0; font-size: 0.88rem;
       color: rgba(255,255,255,0.9);
       border-bottom: 1px solid rgba(255,255,255,0.08);
-      display: flex; gap: 10px;
     }
-    .insight-list li::before { content: '▸'; color: var(--accent); flex-shrink: 0; }
+    .insight-list li::before { content: '▸'; color: var(--accent); margin-right: 6px; }
     .insight-list li:last-child { border-bottom: none; }
-    .insight-list li strong { white-space: nowrap; }
     .watch-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
