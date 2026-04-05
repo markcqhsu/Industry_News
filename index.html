@@ -4,260 +4,374 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>飲料包材產業情報季報</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* ============================================================
+       RESET & VARIABLES
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --primary: #1a3a5c;
-      --accent: #2e86ab;
-      --green: #27ae60;
-      --gray-light: #f5f7fa;
-      --gray-mid: #dce3ed;
-      --text-main: #2c3e50;
-      --text-muted: #6c7a89;
+      --fs-xs:   0.8rem;
+      --fs-sm:   0.9rem;
+      --fs-base: 1rem;
+      --fs-md:   1.15rem;
+      --fs-lg:   1.35rem;
+      --fs-xl:   1.7rem;
+
+      --navy:       #1a3a5c;
+      --navy-dark:  #0f2340;
+      --navy-light: #2d5a8e;
+      --amber:      #f59e0b;
+      --white:      #ffffff;
+      --gray-50:    #f8fafc;
+      --gray-100:   #f1f5f9;
+      --gray-200:   #e2e8f0;
+      --gray-300:   #cbd5e1;
+      --gray-500:   #64748b;
+      --gray-700:   #374151;
+      --gray-900:   #0f172a;
+
+      --r-sm: 6px;
+      --r-md: 12px;
+      --r-lg: 16px;
+
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.10), 0 2px 4px rgba(0,0,0,.06);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,.13), 0 4px 8px rgba(0,0,0,.08);
+
+      --t-fast:   150ms ease-out;
+      --t-normal: 250ms ease-out;
+
+      --header-h: 68px;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
-      font-family: 'Noto Sans TC', 'Microsoft JhengHei', 'Segoe UI', sans-serif;
-      background: var(--gray-light);
-      color: var(--text-main);
+      font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+      font-size: var(--fs-base);
       line-height: 1.7;
-      min-height: 100vh;
+      color: var(--gray-900);
+      background: var(--gray-50);
+      min-height: 100dvh;
     }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible,
+    button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
 
-    /* ===== HEADER ===== */
-    header {
-      background: linear-gradient(135deg, var(--primary) 0%, #0d2340 100%);
-      color: white;
-      padding: 52px 48px 44px;
-      position: relative;
-      overflow: hidden;
+    /* ============================================================
+       SKIP LINK
+       ============================================================ */
+    .skip-link {
+      position: absolute; top: -100%; left: 1rem;
+      background: var(--navy); color: var(--white);
+      padding: 0.5rem 1.5rem; border-radius: 0 0 6px 6px;
+      font-size: var(--fs-sm); font-weight: 600;
+      z-index: 9999; transition: top var(--t-fast);
+      text-decoration: none;
     }
-    header::before {
-      content: '';
-      position: absolute; top: -80px; right: -60px;
-      width: 360px; height: 360px;
-      border-radius: 50%;
-      background: rgba(46,134,171,0.12);
+    .skip-link:focus { top: 0; outline: 3px solid var(--amber); }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--navy-dark);
+      box-shadow: 0 2px 12px rgba(0,0,0,.3);
     }
-    header::after {
-      content: '';
-      position: absolute; bottom: -100px; left: -50px;
-      width: 250px; height: 250px;
-      border-radius: 50%;
-      background: rgba(46,134,171,0.08);
+    .header-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; height: var(--header-h);
     }
-    .header-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+    .header-brand {
+      display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0;
+    }
+    .brand-icon svg { display: block; }
+    .brand-name { font-size: var(--fs-md); font-weight: 700; color: var(--white); line-height: 1.2; }
+    .brand-sub {
+      font-size: 0.68rem; color: rgba(255,255,255,.5);
+      letter-spacing: .04em; font-family: 'Inter', sans-serif;
+    }
+    .header-right { display: flex; align-items: center; gap: 0.75rem; }
     .header-version {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 18px;
-      letter-spacing: 0.04em;
+      font-size: 0.65rem; font-weight: 700;
+      background: rgba(245,158,11,.18); color: var(--amber);
+      border: 1px solid rgba(245,158,11,.4);
+      padding: 3px 10px; border-radius: 100px;
+      font-family: 'Inter', sans-serif; letter-spacing: .04em;
     }
-    .header-badge {
-      display: inline-block;
-      background: var(--accent);
-      color: white;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      padding: 4px 14px;
-      border-radius: 20px;
-      margin-bottom: 18px;
-      text-transform: uppercase;
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center;
+      gap: 5px; width: 44px; height: 44px;
+      background: transparent; border: 2px solid rgba(255,255,255,.3);
+      border-radius: var(--r-sm); cursor: pointer; padding: 8px; flex-shrink: 0;
+      transition: border-color var(--t-fast);
     }
-    header h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -0.01em;
-      line-height: 1.2;
-      margin-bottom: 10px;
+    .hamburger span {
+      display: block; width: 100%; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: transform var(--t-normal), opacity var(--t-normal);
     }
-    header .subtitle {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 28px;
-    }
-    .header-meta {
-      display: flex; gap: 28px; flex-wrap: wrap;
-      font-size: 0.8rem; color: rgba(255,255,255,0.6);
-    }
-    .header-meta span { display: flex; align-items: center; gap: 6px; }
+    .hamburger:hover { border-color: rgba(255,255,255,.6); }
+    .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* ===== REGION TABS ===== */
-    .tab-bar {
-      background: white;
-      border-bottom: 1px solid var(--gray-mid);
-      padding: 0 48px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    /* ============================================================
+       MOBILE NAV
+       ============================================================ */
+    .mobile-nav { background: var(--navy); border-bottom: 1px solid rgba(255,255,255,.1); }
+    .mobile-nav-list { list-style: none; display: flex; flex-direction: column; }
+    .mobile-nav-list button {
+      display: block; width: 100%; text-align: left;
+      background: none; border: none; cursor: pointer; font-family: inherit;
+      padding: 1rem 1.5rem; font-size: var(--fs-md); font-weight: 500;
+      color: rgba(255,255,255,.85);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      transition: background var(--t-fast);
     }
+    .mobile-nav-list button:hover { background: rgba(255,255,255,.08); }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, #1e4d7a 100%);
+      color: var(--white); padding: 4rem 0;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; position: relative;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: rgba(245,158,11,.18); color: var(--amber);
+      border: 1px solid rgba(245,158,11,.4);
+      border-radius: 100px; padding: 0.3rem 1rem;
+      font-size: var(--fs-sm); font-weight: 600; letter-spacing: .03em;
+      margin-bottom: 1.2rem;
+    }
+    .hero-title {
+      font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 900;
+      line-height: 1.2; margin-bottom: 0.75rem; max-width: 660px;
+    }
+    .hero-subtitle {
+      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+      color: rgba(255,255,255,.75); max-width: 580px;
+      line-height: 1.8; margin-bottom: 2.5rem;
+    }
+    .hero-stats {
+      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+    }
+    .stat-item { display: flex; flex-direction: column; align-items: flex-start; }
+    .stat-num {
+      font-size: 2rem; font-weight: 900; color: var(--amber);
+      line-height: 1; font-family: 'Inter', sans-serif;
+    }
+    .stat-label { font-size: 0.7rem; color: rgba(255,255,255,.6); margin-top: 3px; letter-spacing: .04em; }
+    .stat-divider { width: 1px; height: 36px; background: rgba(255,255,255,.2); }
+
+    /* Hero meta — SVG icon + text */
+    .hero-meta {
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,.12);
+      display: flex; flex-wrap: wrap; gap: 1.5rem;
+      font-size: var(--fs-sm); color: rgba(255,255,255,.6);
+    }
+    .hero-meta-item {
+      display: flex; align-items: center; gap: 0.45rem;
+    }
+    .hero-meta-item svg { flex-shrink: 0; opacity: 0.75; }
+
+    /* ============================================================
+       REGION TABS — full ARIA tablist pattern
+       ============================================================ */
+    .region-tabs {
+      position: sticky; top: var(--header-h); z-index: 100;
+      background: var(--white);
+      border-bottom: 2px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+    }
+    .region-tabs-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;
+    }
+    /* role="tablist" applied in HTML */
     .tab-list {
-      display: flex;
-      max-width: 1100px;
-      margin: 0 auto;
-      gap: 0;
-      overflow-x: auto;
+      display: flex; overflow-x: auto; scrollbar-width: none; gap: 0;
+      list-style: none; -ms-overflow-style: none;
+      /* prevent scroll chaining */
+      overscroll-behavior-x: contain;
     }
+    .tab-list::-webkit-scrollbar { display: none; }
+
+    /* role="tab" on each button */
     .tab-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      padding: 16px 22px;
+      display: flex; align-items: center; gap: 0.5rem;
+      background: none; border: none; cursor: pointer;
+      font-family: inherit; font-size: var(--fs-sm); font-weight: 600;
+      color: var(--gray-500); padding: 1rem 1.25rem;
       border-bottom: 3px solid transparent;
-      white-space: nowrap;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 7px;
+      white-space: nowrap; min-height: 56px;
+      /* P1: custom focus ring for tabs */
+      outline: none;
+      transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
     }
-    .tab-btn:hover { color: var(--accent); }
-    .tab-btn.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
+    .tab-btn:hover { color: var(--navy); background: var(--gray-50); }
+    /* P1: keyboard focus visible ring */
+    .tab-btn:focus-visible {
+      outline: 3px solid var(--amber);
+      outline-offset: -3px;
+      border-radius: 4px 4px 0 0;
     }
-    .tab-btn .coming-badge {
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      background: var(--gray-mid);
-      color: var(--text-muted);
-      padding: 1px 6px;
-      border-radius: 8px;
-      text-transform: uppercase;
+    /* aria-selected="true" drives active state */
+    .tab-btn[aria-selected="true"] {
+      color: var(--navy); border-bottom-color: var(--navy-light);
+    }
+    .tab-dot {
+      width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+    }
+    .coming-badge {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: .05em;
+      background: var(--gray-200); color: var(--gray-500);
+      padding: 1px 6px; border-radius: 8px; text-transform: uppercase;
     }
 
-    /* ===== MAIN ===== */
+    /* ============================================================
+       MAIN
+       ============================================================ */
     .main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 44px 48px 60px;
+      max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem;
     }
 
-    /* ===== REGION PANEL ===== */
-    .region-panel { display: none; }
-    .region-panel.active { display: block; }
+    /* ============================================================
+       REGION PANEL — P7 fade animation on switch
+       ============================================================ */
+    .region-panel {
+      display: none;
+      /* P7: use opacity/transform so animation is composited (no layout shift) */
+    }
+    .region-panel.active {
+      display: block;
+      animation: panel-in 180ms ease-out both;
+    }
+    @keyframes panel-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      @keyframes panel-in { from { opacity: 0; } to { opacity: 1; } }
+    }
 
-    /* ===== YEAR GROUP ===== */
-    .year-group { margin-bottom: 48px; }
+    /* ============================================================
+       YEAR GROUP
+       ============================================================ */
+    .year-group { margin-bottom: 3rem; }
     .year-heading {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: var(--fs-md); font-weight: 800; color: var(--navy);
+      margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.75rem;
     }
     .year-heading::after {
-      content: '';
-      flex: 1;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gray-mid), transparent);
+      content: ''; flex: 1; height: 2px;
+      background: linear-gradient(90deg, var(--gray-200), transparent);
     }
 
-    /* ===== QUARTER GRID ===== */
+    /* ============================================================
+       QUARTER GRID
+       ============================================================ */
     .quarter-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 1.25rem;
     }
-    @media (max-width: 900px) { .quarter-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 520px) { .quarter-grid { grid-template-columns: 1fr; } }
 
-    /* ===== QUARTER CARD ===== */
+    /* ============================================================
+       QUARTER CARD
+       ============================================================ */
     .q-card {
-      background: white;
-      border-radius: 14px;
+      background: var(--white);
+      border-radius: var(--r-lg);
+      border: 1px solid var(--gray-200);
       overflow: hidden;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
-      transition: box-shadow 0.2s, transform 0.2s;
-      display: flex;
-      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--t-normal), transform var(--t-normal);
+      display: flex; flex-direction: column;
+      position: relative;
     }
     .q-card.available:hover {
-      box-shadow: 0 8px 32px rgba(46,134,171,0.18);
+      box-shadow: var(--shadow-lg);
       transform: translateY(-3px);
     }
+    /* P2: coming-soon cards not interactive, no hover lift */
     .q-card.coming {
-      opacity: 0.6;
-      box-shadow: none;
+      opacity: 0.55;
     }
 
-    .q-card-banner {
-      height: 7px;
-      background: var(--gray-mid);
-    }
+    /* Colored top accent */
+    .q-card-banner { height: 6px; background: var(--gray-200); }
     .q-card.available .q-card-banner {
-      background: linear-gradient(90deg, var(--accent), #27ae60);
+      background: linear-gradient(90deg, var(--card-color, var(--navy-light)), var(--card-color2, var(--navy)));
+    }
+
+    /* "最新" badge on available cards */
+    .q-new-badge {
+      position: absolute; top: 14px; right: 14px;
+      font-size: 0.6rem; font-weight: 800;
+      background: var(--card-color, var(--navy-light)); color: var(--white);
+      padding: 2px 7px; border-radius: 100px;
+      letter-spacing: .06em; text-transform: uppercase;
+      font-family: 'Inter', sans-serif;
     }
 
     .q-card-body {
-      padding: 22px 22px 18px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
+      padding: 1.25rem 1.25rem 1rem; flex: 1;
+      display: flex; flex-direction: column;
     }
     .q-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 6px;
+      font-size: 0.65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--gray-500); margin-bottom: 4px;
     }
     .q-title {
-      font-size: 1.3rem;
-      font-weight: 900;
-      color: var(--primary);
-      margin-bottom: 4px;
-      letter-spacing: -0.01em;
+      font-size: 1.6rem; font-weight: 900; color: var(--navy-dark);
+      margin-bottom: 2px; letter-spacing: -.01em;
+      font-family: 'Inter', sans-serif;
     }
     .q-months {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-bottom: 16px;
+      font-size: 0.75rem; color: var(--gray-500); margin-bottom: 1rem;
+      font-family: 'Inter', sans-serif;
     }
 
     .q-stats {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
+      display: flex; margin-bottom: 1rem;
+      border: 1px solid var(--gray-100); border-radius: var(--r-md); overflow: hidden;
     }
     .q-stat {
-      text-align: center;
-      flex: 1;
-      min-width: 44px;
+      flex: 1; text-align: center; padding: 0.55rem 0.4rem;
+      border-right: 1px solid var(--gray-100);
     }
+    .q-stat:last-child { border-right: none; }
     .q-stat .snum {
-      display: block;
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--accent);
+      display: block; font-size: 1.1rem; font-weight: 800;
+      color: var(--card-color, var(--navy-light)); line-height: 1;
     }
     .q-stat .slbl {
-      font-size: 0.62rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+      font-size: 0.58rem; color: var(--gray-500);
+      text-transform: uppercase; letter-spacing: .06em;
     }
 
-    .q-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-bottom: 18px;
-    }
+    .q-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 1rem; }
     .q-tag {
-      font-size: 0.63rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 4px;
+      font-size: 0.62rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 100px;
     }
     .tag-rpet { background: #c8e6c9; color: #2e7d32; }
     .tag-reg  { background: #e0f2f1; color: #004d40; }
@@ -265,212 +379,277 @@
     .tag-new  { background: #f3e5f5; color: #6a1b9a; }
     .tag-pack { background: #e3f2fd; color: #0d47a1; }
 
-    .q-card-footer {
-      padding: 0 22px 20px;
-    }
+    .q-card-footer { padding: 0 1.25rem 1.25rem; }
+    /* P2: cursor:pointer on interactive card buttons */
     .q-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: background 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      width: 100%; padding: 0.65rem; border-radius: var(--r-md);
+      font-family: inherit; font-size: 0.82rem; font-weight: 700;
+      text-decoration: none; border: none;
+      min-height: 44px;
     }
     .q-btn-available {
-      background: var(--accent);
-      color: white;
+      background: var(--card-color, var(--navy-light)); color: var(--white);
+      cursor: pointer;
+      transition: filter var(--t-fast);
     }
-    .q-btn-available:hover { background: #1f6a8a; }
+    .q-btn-available:hover { filter: brightness(0.88); }
+    .q-btn-available:focus-visible {
+      outline: 3px solid var(--amber); outline-offset: 2px;
+    }
+    /* P1+P2: coming-soon uses disabled button semantics */
     .q-btn-coming {
-      background: var(--gray-light);
-      color: var(--text-muted);
-      cursor: default;
+      background: var(--gray-100); color: var(--gray-500);
+      cursor: not-allowed;
     }
 
-    /* ===== COMING SOON OVERLAY ===== */
+    /* Lock icon for coming-soon */
     .q-coming-label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.8rem; font-weight: 600; color: var(--gray-500); margin-bottom: 1rem;
     }
-    .q-coming-label::before {
-      content: '';
-      display: inline-block;
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--gray-mid);
-    }
+    .q-coming-label svg { flex-shrink: 0; }
 
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 28px;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--gray-mid);
-      background: white;
-    }
-    footer span { color: var(--accent); }
-
-    /* ===== COMING SOON PAGE ===== */
+    /* ============================================================
+       COMING SOON PAGE — SVG icon instead of emoji
+       ============================================================ */
     .coming-soon-page {
-      text-align: center;
-      padding: 80px 20px;
-      color: var(--text-muted);
+      text-align: center; padding: 5rem 1.5rem; color: var(--gray-500);
     }
-    .coming-soon-page .icon { font-size: 3.5rem; margin-bottom: 16px; }
+    .coming-soon-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 72px; height: 72px; margin: 0 auto 1.25rem;
+      background: var(--gray-100); border-radius: 50%;
+    }
+    .coming-soon-icon svg { opacity: 0.55; }
     .coming-soon-page h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 8px;
+      font-size: var(--fs-xl); font-weight: 700; color: var(--navy); margin-bottom: 0.5rem;
     }
-    .coming-soon-page p { font-size: 0.9rem; }
+    .coming-soon-page p { font-size: var(--fs-sm); }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .site-footer {
+      background: var(--navy-dark); color: rgba(255,255,255,.6);
+      padding: 2.5rem 0; margin-top: 1rem;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 1.5rem;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 1rem; }
+    .footer-tagline { font-size: var(--fs-sm); color: rgba(255,255,255,.5); }
+    .footer-info { font-size: var(--fs-sm); line-height: 1.8; text-align: right; }
+    .footer-info em { color: var(--amber); font-style: normal; }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 900px) {
+      .quarter-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .quarter-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 767px) {
+      .hamburger { display: flex; }
+      .header-right { display: none; }
+      .brand-sub { display: none; }
+      .hero { padding: 2.5rem 0; }
+      .hero-meta { display: none; }
+      .stat-divider { height: 28px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-info { text-align: left; }
+    }
+    @media (min-width: 768px) {
+      .hamburger { display: none !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .q-card.available:hover { transform: none; }
+    }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
+<!-- Skip link — P1 keyboard/screen-reader -->
+<a href="#main-content" class="skip-link">跳至主要內容</a>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header" role="banner">
   <div class="header-inner">
-    <div class="header-badge">產業情報資料庫</div>
-    <div class="header-version">V1.0.3</div>
-    <h1>飲料與包材產業情報季報</h1>
-    <p class="subtitle">各地區最新飲料包材市場動態、法規政策與產業趨勢彙整</p>
-    <div class="header-meta">
-      <span>📦 主題：PET飲料・包材・鋁蓋・新品・法規</span>
-      <span>🌍 涵蓋地區：台灣・東南亞（更多地區陸續上線）</span>
-      <span>📅 更新頻率：每季</span>
+    <div class="header-brand">
+      <div class="brand-icon" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36" height="36" rx="8" fill="#1a3a5c"/>
+          <path d="M8 26L14 18L20 22L28 10" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="28" cy="10" r="2.5" fill="#f59e0b"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">飲料包材情報</div>
+        <div class="brand-sub">Industry Intelligence Hub</div>
+      </div>
     </div>
+    <div class="header-right">
+      <span class="header-version" aria-label="目前版本 V1.0.4">V1.0.4</span>
+    </div>
+    <button class="hamburger" id="menu-toggle"
+            aria-label="開啟選單" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
-<!-- REGION TABS -->
-<div class="tab-bar">
-  <div class="tab-list">
-    <button class="tab-btn active" data-region="tw">🇹🇼 台灣</button>
-    <button class="tab-btn" data-region="sea">🌏 東南亞</button>
-    <button class="tab-btn" data-region="us">🇺🇸 北美</button>
-    <button class="tab-btn" data-region="latam">🌎 中南美洲 <span class="coming-badge">即將上線</span></button>
-    <button class="tab-btn" data-region="eu">🇪🇺 歐洲 <span class="coming-badge">即將上線</span></button>
-  </div>
-</div>
+<!-- ========== MOBILE NAV ========== -->
+<nav id="mobile-nav" aria-label="行動版選單" hidden>
+  <ul class="mobile-nav-list">
+    <li><button data-region-link="tw">🇹🇼 台灣</button></li>
+    <li><button data-region-link="sea">🌏 東南亞</button></li>
+    <li><button data-region-link="us">🇺🇸 北美</button></li>
+    <li><button data-region-link="latam">🌎 中南美洲</button></li>
+    <li><button data-region-link="eu">🇪🇺 歐洲</button></li>
+  </ul>
+</nav>
 
-<!-- MAIN -->
-<div class="main">
-
-  <!-- ===== SEA PANEL ===== -->
-  <div class="region-panel" id="panel-sea">
-
-    <div class="year-group">
-      <div class="year-heading">2026 年</div>
-      <div class="quarter-grid">
-
-        <!-- Q1 — AVAILABLE -->
-        <div class="q-card available">
-          <div class="q-card-banner"></div>
-          <div class="q-card-body">
-            <div class="q-label">東南亞 · 2026</div>
-            <div class="q-title">Q1</div>
-            <div class="q-months">1月 — 3月</div>
-            <div class="q-stats">
-              <div class="q-stat"><span class="snum">8</span><span class="slbl">國家</span></div>
-              <div class="q-stat"><span class="snum">40+</span><span class="slbl">新聞</span></div>
-              <div class="q-stat"><span class="snum">6</span><span class="slbl">分類</span></div>
-            </div>
-            <div class="q-tags">
-              <span class="q-tag tag-rpet">rPET</span>
-              <span class="q-tag tag-reg">EPR法規</span>
-              <span class="q-tag tag-alum">鋁罐/蓋</span>
-              <span class="q-tag tag-new">新品上市</span>
-              <span class="q-tag tag-pack">包材趨勢</span>
-            </div>
-          </div>
-          <div class="q-card-footer">
-            <a class="q-btn q-btn-available" href="reports/SEA/Q1_2026.html">
-              閱讀報告 →
-            </a>
-          </div>
-        </div>
-
-        <!-- Q2 — COMING SOON -->
-        <div class="q-card coming">
-          <div class="q-card-banner"></div>
-          <div class="q-card-body">
-            <div class="q-label">東南亞 · 2026</div>
-            <div class="q-title">Q2</div>
-            <div class="q-months">4月 — 6月</div>
-            <div class="q-coming-label">尚未發布</div>
-          </div>
-          <div class="q-card-footer">
-            <span class="q-btn q-btn-coming">即將推出</span>
-          </div>
-        </div>
-
-        <!-- Q3 — COMING SOON -->
-        <div class="q-card coming">
-          <div class="q-card-banner"></div>
-          <div class="q-card-body">
-            <div class="q-label">東南亞 · 2026</div>
-            <div class="q-title">Q3</div>
-            <div class="q-months">7月 — 9月</div>
-            <div class="q-coming-label">尚未發布</div>
-          </div>
-          <div class="q-card-footer">
-            <span class="q-btn q-btn-coming">即將推出</span>
-          </div>
-        </div>
-
-        <!-- Q4 — COMING SOON -->
-        <div class="q-card coming">
-          <div class="q-card-banner"></div>
-          <div class="q-card-body">
-            <div class="q-label">東南亞 · 2026</div>
-            <div class="q-title">Q4</div>
-            <div class="q-months">10月 — 12月</div>
-            <div class="q-coming-label">尚未發布</div>
-          </div>
-          <div class="q-card-footer">
-            <span class="q-btn q-btn-coming">即將推出</span>
-          </div>
-        </div>
-
+<!-- ========== HERO ========== -->
+<section class="hero" aria-label="產品簡介">
+  <div class="hero-inner">
+    <div class="hero-badge" aria-hidden="true">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M8 1L9.8 5.5H14.5L10.7 8.3L12.1 13L8 10.1L3.9 13L5.3 8.3L1.5 5.5H6.2L8 1Z" fill="currentColor"/>
+      </svg>
+      產業情報資料庫
+    </div>
+    <h1 class="hero-title">飲料與包材產業情報季報</h1>
+    <p class="hero-subtitle">各地區最新飲料包材市場動態、法規政策與產業趨勢彙整，提供決策者精準的市場洞察。</p>
+    <div class="hero-stats" role="list" aria-label="本季摘要">
+      <div class="stat-item" role="listitem">
+        <span class="stat-num">4</span>
+        <span class="stat-label">現有地區</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item" role="listitem">
+        <span class="stat-num">98+</span>
+        <span class="stat-label">本季報導</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item" role="listitem">
+        <span class="stat-num">Q1</span>
+        <span class="stat-label">2026 年</span>
       </div>
     </div>
-
+    <!-- P4: SVG icons instead of emoji for meta info -->
+    <div class="hero-meta" aria-hidden="true">
+      <span class="hero-meta-item">
+        <!-- box/package icon -->
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+          <line x1="12" y1="22.08" x2="12" y2="12"/>
+        </svg>
+        主題：PET飲料・包材・鋁蓋・新品・法規
+      </span>
+      <span class="hero-meta-item">
+        <!-- globe icon -->
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        涵蓋地區：台灣・東南亞・北美・中南美洲（更多地區陸續上線）
+      </span>
+      <span class="hero-meta-item">
+        <!-- calendar icon -->
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        更新頻率：每季
+      </span>
+    </div>
   </div>
+</section>
 
-  <!-- ===== OTHER REGION PANELS (coming soon) ===== -->
-  <div class="region-panel active" id="panel-tw">
+<!-- ========== REGION TABS — ARIA tablist pattern ========== -->
+<!-- P1: role="tablist", each button gets role="tab" + aria-selected + aria-controls -->
+<nav class="region-tabs" aria-label="市場區域">
+  <div class="region-tabs-inner">
+    <ul class="tab-list" role="tablist" aria-label="選擇市場區域">
+      <li role="presentation">
+        <button class="tab-btn" role="tab"
+                id="tab-tw" aria-selected="true" aria-controls="panel-tw"
+                tabindex="0">
+          <span class="tab-dot" style="background:#c0392b" aria-hidden="true"></span>
+          🇹🇼 台灣
+        </button>
+      </li>
+      <li role="presentation">
+        <button class="tab-btn" role="tab"
+                id="tab-sea" aria-selected="false" aria-controls="panel-sea"
+                tabindex="-1">
+          <span class="tab-dot" style="background:#27ae60" aria-hidden="true"></span>
+          🌏 東南亞
+        </button>
+      </li>
+      <li role="presentation">
+        <button class="tab-btn" role="tab"
+                id="tab-us" aria-selected="false" aria-controls="panel-us"
+                tabindex="-1">
+          <span class="tab-dot" style="background:#2980b9" aria-hidden="true"></span>
+          🇺🇸 北美
+        </button>
+      </li>
+      <li role="presentation">
+        <button class="tab-btn" role="tab"
+                id="tab-latam" aria-selected="false" aria-controls="panel-latam"
+                tabindex="-1">
+          <span class="tab-dot" style="background:#e67e22" aria-hidden="true"></span>
+          🌎 中南美洲
+        </button>
+      </li>
+      <li role="presentation">
+        <button class="tab-btn" role="tab"
+                id="tab-eu" aria-selected="false" aria-controls="panel-eu"
+                tabindex="-1">
+          <span class="tab-dot" style="background:#8e44ad" aria-hidden="true"></span>
+          🇪🇺 歐洲
+          <span class="coming-badge" aria-label="即將上線">即將上線</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main id="main-content" class="main">
+
+  <!-- ===== TW PANEL ===== -->
+  <!-- P1: role="tabpanel", aria-labelledby linking back to tab -->
+  <div class="region-panel active" id="panel-tw"
+       role="tabpanel" aria-labelledby="tab-tw" tabindex="0">
     <div class="year-group">
       <div class="year-heading">2026 年</div>
       <div class="quarter-grid">
 
-        <!-- Q1 — AVAILABLE -->
-        <div class="q-card available">
+        <div class="q-card available" style="--card-color:#c0392b; --card-color2:#e74c3c">
           <div class="q-card-banner"></div>
+          <span class="q-new-badge" aria-label="最新">最新</span>
           <div class="q-card-body">
             <div class="q-label">台灣 · 2026</div>
             <div class="q-title">Q1</div>
             <div class="q-months">1月 — 3月</div>
-            <div class="q-stats">
+            <div class="q-stats" aria-label="本期統計">
               <div class="q-stat"><span class="snum">1</span><span class="slbl">地區</span></div>
               <div class="q-stat"><span class="snum">14</span><span class="slbl">新聞</span></div>
               <div class="q-stat"><span class="snum">6</span><span class="slbl">分類</span></div>
             </div>
-            <div class="q-tags">
+            <div class="q-tags" aria-label="主題標籤">
               <span class="q-tag tag-rpet">rPET</span>
               <span class="q-tag tag-reg">碳費法規</span>
               <span class="q-tag tag-alum">鋁罐/蓋</span>
@@ -479,89 +658,182 @@
             </div>
           </div>
           <div class="q-card-footer">
-            <a class="q-btn q-btn-available" href="reports/TW/Q1_2026.html">閱讀報告 →</a>
+            <a class="q-btn q-btn-available" href="reports/TW/Q1_2026.html"
+               aria-label="閱讀台灣 2026 Q1 報告">閱讀報告 →</a>
           </div>
         </div>
 
-        <!-- Q2 — COMING SOON -->
         <div class="q-card coming">
           <div class="q-card-banner"></div>
           <div class="q-card-body">
             <div class="q-label">台灣 · 2026</div>
             <div class="q-title">Q2</div>
             <div class="q-months">4月 — 6月</div>
-            <div class="q-coming-label">尚未發布</div>
+            <div class="q-coming-label">
+              <!-- P4: SVG lock icon instead of pseudo-element dot -->
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              尚未發布
+            </div>
           </div>
+          <!-- P1+P2: disabled button with aria-disabled -->
           <div class="q-card-footer">
-            <span class="q-btn q-btn-coming">即將推出</span>
+            <button class="q-btn q-btn-coming" disabled aria-disabled="true"
+                    aria-label="台灣 Q2 報告尚未發布">即將推出</button>
           </div>
         </div>
 
-        <!-- Q3 — COMING SOON -->
         <div class="q-card coming">
           <div class="q-card-banner"></div>
           <div class="q-card-body">
             <div class="q-label">台灣 · 2026</div>
             <div class="q-title">Q3</div>
             <div class="q-months">7月 — 9月</div>
-            <div class="q-coming-label">尚未發布</div>
+            <div class="q-coming-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              尚未發布
+            </div>
           </div>
           <div class="q-card-footer">
-            <span class="q-btn q-btn-coming">即將推出</span>
+            <button class="q-btn q-btn-coming" disabled aria-disabled="true"
+                    aria-label="台灣 Q3 報告尚未發布">即將推出</button>
           </div>
         </div>
 
-        <!-- Q4 — COMING SOON -->
         <div class="q-card coming">
           <div class="q-card-banner"></div>
           <div class="q-card-body">
             <div class="q-label">台灣 · 2026</div>
             <div class="q-title">Q4</div>
             <div class="q-months">10月 — 12月</div>
-            <div class="q-coming-label">尚未發布</div>
+            <div class="q-coming-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              尚未發布
+            </div>
           </div>
           <div class="q-card-footer">
-            <span class="q-btn q-btn-coming">即將推出</span>
+            <button class="q-btn q-btn-coming" disabled aria-disabled="true"
+                    aria-label="台灣 Q4 報告尚未發布">即將推出</button>
           </div>
         </div>
 
       </div>
     </div>
   </div>
-  <div class="region-panel" id="panel-latam">
-    <div class="coming-soon-page">
-      <div class="icon">🌎</div>
-      <h2>中南美洲季報</h2>
-      <p>此地區報告正在建置中，敬請期待。</p>
-    </div>
-  </div>
-  <div class="region-panel" id="panel-eu">
-    <div class="coming-soon-page">
-      <div class="icon">🇪🇺</div>
-      <h2>歐洲季報</h2>
-      <p>此地區報告正在建置中，敬請期待。</p>
-    </div>
-  </div>
-  <!-- ===== NA PANEL ===== -->
-  <div class="region-panel" id="panel-us">
 
+  <!-- ===== SEA PANEL ===== -->
+  <div class="region-panel" id="panel-sea"
+       role="tabpanel" aria-labelledby="tab-sea" tabindex="0" hidden>
     <div class="year-group">
       <div class="year-heading">2026 年</div>
       <div class="quarter-grid">
 
-        <!-- Q1 — AVAILABLE -->
-        <div class="q-card available">
+        <div class="q-card available" style="--card-color:#27ae60; --card-color2:#2ecc71">
           <div class="q-card-banner"></div>
+          <span class="q-new-badge" aria-label="最新">最新</span>
+          <div class="q-card-body">
+            <div class="q-label">東南亞 · 2026</div>
+            <div class="q-title">Q1</div>
+            <div class="q-months">1月 — 3月</div>
+            <div class="q-stats" aria-label="本期統計">
+              <div class="q-stat"><span class="snum">8</span><span class="slbl">國家</span></div>
+              <div class="q-stat"><span class="snum">40+</span><span class="slbl">新聞</span></div>
+              <div class="q-stat"><span class="snum">6</span><span class="slbl">分類</span></div>
+            </div>
+            <div class="q-tags" aria-label="主題標籤">
+              <span class="q-tag tag-rpet">rPET</span>
+              <span class="q-tag tag-reg">EPR法規</span>
+              <span class="q-tag tag-alum">鋁罐/蓋</span>
+              <span class="q-tag tag-new">新品上市</span>
+              <span class="q-tag tag-pack">包材趨勢</span>
+            </div>
+          </div>
+          <div class="q-card-footer">
+            <a class="q-btn q-btn-available" href="reports/SEA/Q1_2026.html"
+               aria-label="閱讀東南亞 2026 Q1 報告">閱讀報告 →</a>
+          </div>
+        </div>
+
+        <div class="q-card coming">
+          <div class="q-card-banner"></div>
+          <div class="q-card-body">
+            <div class="q-label">東南亞 · 2026</div>
+            <div class="q-title">Q2</div>
+            <div class="q-months">4月 — 6月</div>
+            <div class="q-coming-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              尚未發布
+            </div>
+          </div>
+          <div class="q-card-footer">
+            <button class="q-btn q-btn-coming" disabled aria-disabled="true" aria-label="東南亞 Q2 報告尚未發布">即將推出</button>
+          </div>
+        </div>
+
+        <div class="q-card coming">
+          <div class="q-card-banner"></div>
+          <div class="q-card-body">
+            <div class="q-label">東南亞 · 2026</div>
+            <div class="q-title">Q3</div>
+            <div class="q-months">7月 — 9月</div>
+            <div class="q-coming-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              尚未發布
+            </div>
+          </div>
+          <div class="q-card-footer">
+            <button class="q-btn q-btn-coming" disabled aria-disabled="true" aria-label="東南亞 Q3 報告尚未發布">即將推出</button>
+          </div>
+        </div>
+
+        <div class="q-card coming">
+          <div class="q-card-banner"></div>
+          <div class="q-card-body">
+            <div class="q-label">東南亞 · 2026</div>
+            <div class="q-title">Q4</div>
+            <div class="q-months">10月 — 12月</div>
+            <div class="q-coming-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              尚未發布
+            </div>
+          </div>
+          <div class="q-card-footer">
+            <button class="q-btn q-btn-coming" disabled aria-disabled="true" aria-label="東南亞 Q4 報告尚未發布">即將推出</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== NA PANEL ===== -->
+  <div class="region-panel" id="panel-us"
+       role="tabpanel" aria-labelledby="tab-us" tabindex="0" hidden>
+    <div class="year-group">
+      <div class="year-heading">2026 年</div>
+      <div class="quarter-grid">
+
+        <div class="q-card available" style="--card-color:#2980b9; --card-color2:#3498db">
+          <div class="q-card-banner"></div>
+          <span class="q-new-badge" aria-label="最新">最新</span>
           <div class="q-card-body">
             <div class="q-label">北美 · 2026</div>
             <div class="q-title">Q1</div>
             <div class="q-months">1月 — 3月</div>
-            <div class="q-stats">
+            <div class="q-stats" aria-label="本期統計">
               <div class="q-stat"><span class="snum">2</span><span class="slbl">國家</span></div>
               <div class="q-stat"><span class="snum">21</span><span class="slbl">新聞</span></div>
               <div class="q-stat"><span class="snum">6</span><span class="slbl">分類</span></div>
             </div>
-            <div class="q-tags">
+            <div class="q-tags" aria-label="主題標籤">
               <span class="q-tag tag-rpet">rPET</span>
               <span class="q-tag tag-reg">EPR法規</span>
               <span class="q-tag tag-alum">鋁材關稅</span>
@@ -570,77 +842,263 @@
             </div>
           </div>
           <div class="q-card-footer">
-            <a class="q-btn q-btn-available" href="reports/NA/Q1_2026.html">
-              閱讀報告 →
-            </a>
+            <a class="q-btn q-btn-available" href="reports/NA/Q1_2026.html"
+               aria-label="閱讀北美 2026 Q1 報告">閱讀報告 →</a>
           </div>
         </div>
 
-        <!-- Q2 — COMING SOON -->
         <div class="q-card coming">
           <div class="q-card-banner"></div>
           <div class="q-card-body">
             <div class="q-label">北美 · 2026</div>
             <div class="q-title">Q2</div>
             <div class="q-months">4月 — 6月</div>
-            <div class="q-coming-label">尚未發布</div>
+            <div class="q-coming-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              尚未發布
+            </div>
           </div>
           <div class="q-card-footer">
-            <span class="q-btn q-btn-coming">即將推出</span>
+            <button class="q-btn q-btn-coming" disabled aria-disabled="true" aria-label="北美 Q2 報告尚未發布">即將推出</button>
           </div>
         </div>
 
-        <!-- Q3 — COMING SOON -->
         <div class="q-card coming">
           <div class="q-card-banner"></div>
           <div class="q-card-body">
             <div class="q-label">北美 · 2026</div>
             <div class="q-title">Q3</div>
             <div class="q-months">7月 — 9月</div>
-            <div class="q-coming-label">尚未發布</div>
+            <div class="q-coming-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              尚未發布
+            </div>
           </div>
           <div class="q-card-footer">
-            <span class="q-btn q-btn-coming">即將推出</span>
+            <button class="q-btn q-btn-coming" disabled aria-disabled="true" aria-label="北美 Q3 報告尚未發布">即將推出</button>
           </div>
         </div>
 
-        <!-- Q4 — COMING SOON -->
         <div class="q-card coming">
           <div class="q-card-banner"></div>
           <div class="q-card-body">
             <div class="q-label">北美 · 2026</div>
             <div class="q-title">Q4</div>
             <div class="q-months">10月 — 12月</div>
-            <div class="q-coming-label">尚未發布</div>
+            <div class="q-coming-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              尚未發布
+            </div>
           </div>
           <div class="q-card-footer">
-            <span class="q-btn q-btn-coming">即將推出</span>
+            <button class="q-btn q-btn-coming" disabled aria-disabled="true" aria-label="北美 Q4 報告尚未發布">即將推出</button>
           </div>
         </div>
 
       </div>
     </div>
-
   </div>
 
-</div>
+  <!-- ===== LATAM PANEL ===== -->
+  <div class="region-panel" id="panel-latam"
+       role="tabpanel" aria-labelledby="tab-latam" tabindex="0" hidden>
+    <div class="year-group">
+      <div class="year-heading">2026 年</div>
+      <div class="quarter-grid">
 
-<!-- FOOTER -->
-<footer>
-  飲料與包材產業情報季報 &nbsp;|&nbsp; <span>Industry Intelligence Hub</span> &nbsp;|&nbsp; 資料僅供內部參考使用
+        <div class="q-card available" style="--card-color:#e67e22; --card-color2:#f39c12">
+          <div class="q-card-banner"></div>
+          <span class="q-new-badge" aria-label="最新">最新</span>
+          <div class="q-card-body">
+            <div class="q-label">中南美洲 · 2026</div>
+            <div class="q-title">Q1</div>
+            <div class="q-months">1月 — 3月</div>
+            <div class="q-stats" aria-label="本期統計">
+              <div class="q-stat"><span class="snum">10</span><span class="slbl">國家</span></div>
+              <div class="q-stat"><span class="snum">23</span><span class="slbl">新聞</span></div>
+              <div class="q-stat"><span class="snum">6</span><span class="slbl">分類</span></div>
+            </div>
+            <div class="q-tags" aria-label="主題標籤">
+              <span class="q-tag tag-rpet">rPET</span>
+              <span class="q-tag tag-reg">EPR法規</span>
+              <span class="q-tag tag-alum">鋁罐/蓋</span>
+              <span class="q-tag tag-new">新品上市</span>
+              <span class="q-tag tag-pack">包材趨勢</span>
+            </div>
+          </div>
+          <div class="q-card-footer">
+            <a class="q-btn q-btn-available" href="reports/LATAM/Q1_2026.html"
+               aria-label="閱讀中南美洲 2026 Q1 報告">閱讀報告 →</a>
+          </div>
+        </div>
+
+        <div class="q-card coming">
+          <div class="q-card-banner"></div>
+          <div class="q-card-body">
+            <div class="q-label">中南美洲 · 2026</div>
+            <div class="q-title">Q2</div>
+            <div class="q-months">4月 — 6月</div>
+            <div class="q-coming-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              尚未發布
+            </div>
+          </div>
+          <div class="q-card-footer">
+            <button class="q-btn q-btn-coming" disabled aria-disabled="true" aria-label="中南美洲 Q2 報告尚未發布">即將推出</button>
+          </div>
+        </div>
+
+        <div class="q-card coming">
+          <div class="q-card-banner"></div>
+          <div class="q-card-body">
+            <div class="q-label">中南美洲 · 2026</div>
+            <div class="q-title">Q3</div>
+            <div class="q-months">7月 — 9月</div>
+            <div class="q-coming-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              尚未發布
+            </div>
+          </div>
+          <div class="q-card-footer">
+            <button class="q-btn q-btn-coming" disabled aria-disabled="true" aria-label="中南美洲 Q3 報告尚未發布">即將推出</button>
+          </div>
+        </div>
+
+        <div class="q-card coming">
+          <div class="q-card-banner"></div>
+          <div class="q-card-body">
+            <div class="q-label">中南美洲 · 2026</div>
+            <div class="q-title">Q4</div>
+            <div class="q-months">10月 — 12月</div>
+            <div class="q-coming-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              尚未發布
+            </div>
+          </div>
+          <div class="q-card-footer">
+            <button class="q-btn q-btn-coming" disabled aria-disabled="true" aria-label="中南美洲 Q4 報告尚未發布">即將推出</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== EU PANEL ===== -->
+  <div class="region-panel" id="panel-eu"
+       role="tabpanel" aria-labelledby="tab-eu" tabindex="0" hidden>
+    <div class="coming-soon-page">
+      <!-- P4: SVG building/EU icon instead of emoji -->
+      <div class="coming-soon-icon" aria-hidden="true">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <h2>歐洲季報</h2>
+      <p>此地區報告正在建置中，敬請期待。</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="36" height="36" rx="8" fill="#1a3a5c"/>
+        <path d="M8 26L14 18L20 22L28 10" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="28" cy="10" r="2.5" fill="#f59e0b"/>
+      </svg>
+      <span class="footer-tagline">每季發布 · 四大市場 · 精準洞察</span>
+    </div>
+    <div class="footer-info">
+      <p>飲料與包材產業情報季報 &nbsp;|&nbsp; <em>Industry Intelligence Hub</em></p>
+      <p>資料僅供內部參考使用</p>
+    </div>
+  </div>
 </footer>
 
 <script>
-  const tabs = document.querySelectorAll('.tab-btn');
-  const panels = document.querySelectorAll('.region-panel');
+  // ================================================================
+  // ARIA Tablist — P1 Accessibility + P9 Navigation
+  // Implements: role="tab", aria-selected, keyboard arrow nav,
+  //             focus management, panel hidden attribute
+  // ================================================================
+  const tabBtns = Array.from(document.querySelectorAll('[role="tab"]'));
+  const panels  = Array.from(document.querySelectorAll('[role="tabpanel"]'));
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const region = tab.dataset.region;
-      tabs.forEach(t => t.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById('panel-' + region).classList.add('active');
+  function activateTab(tab, setFocus) {
+    // Deactivate all
+    tabBtns.forEach(t => {
+      t.setAttribute('aria-selected', 'false');
+      t.setAttribute('tabindex', '-1');
+    });
+    panels.forEach(p => {
+      p.classList.remove('active');
+      p.setAttribute('hidden', '');
+    });
+
+    // Activate selected
+    tab.setAttribute('aria-selected', 'true');
+    tab.setAttribute('tabindex', '0');
+
+    const panelId = tab.getAttribute('aria-controls');
+    const panel   = document.getElementById(panelId);
+    if (panel) {
+      panel.removeAttribute('hidden');
+      // Trigger reflow so animation restarts on each switch
+      panel.classList.remove('active');
+      void panel.offsetWidth; // reflow
+      panel.classList.add('active');
+    }
+
+    if (setFocus) tab.focus();
+  }
+
+  // Click
+  tabBtns.forEach(tab => {
+    tab.addEventListener('click', () => activateTab(tab, false));
+  });
+
+  // P1+P9: Arrow key navigation within tablist
+  tabBtns.forEach((tab, idx) => {
+    tab.addEventListener('keydown', e => {
+      let newIdx = null;
+      if (e.key === 'ArrowRight') newIdx = (idx + 1) % tabBtns.length;
+      if (e.key === 'ArrowLeft')  newIdx = (idx - 1 + tabBtns.length) % tabBtns.length;
+      if (e.key === 'Home')       newIdx = 0;
+      if (e.key === 'End')        newIdx = tabBtns.length - 1;
+      if (newIdx !== null) {
+        e.preventDefault();
+        activateTab(tabBtns[newIdx], true);
+      }
+    });
+  });
+
+  // ================================================================
+  // Hamburger — mobile nav toggle
+  // ================================================================
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileNav  = document.getElementById('mobile-nav');
+
+  menuToggle.addEventListener('click', () => {
+    const open = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!open));
+    open ? mobileNav.setAttribute('hidden', '') : mobileNav.removeAttribute('hidden');
+  });
+
+  // Mobile nav → switch tab and close menu
+  document.querySelectorAll('[data-region-link]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const regionId = btn.dataset.regionLink;
+      const targetTab = document.getElementById('tab-' + regionId);
+      if (targetTab) activateTab(targetTab, false);
+      mobileNav.setAttribute('hidden', '');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' });
     });
   });
 </script>
