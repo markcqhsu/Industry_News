@@ -517,11 +517,11 @@
 <nav id="mobile-nav" class="mobile-nav" aria-label="行動版選單" hidden>
   <ul class="mobile-nav-list">
     <li><button data-region-link="tw">🇹🇼 台灣</button></li>
+    <li><button data-region-link="nea">🗾 東北亞</button></li>
     <li><button data-region-link="sea">🌏 東南亞</button></li>
     <li><button data-region-link="us">🇺🇸 北美</button></li>
     <li><button data-region-link="latam">🌎 中南美洲</button></li>
     <li><button data-region-link="eu">🇪🇺 歐洲</button></li>
-    <li><button data-region-link="nea">🗾 東北亞</button></li>
   </ul>
 </nav>
 
@@ -601,6 +601,14 @@
       </li>
       <li role="presentation">
         <button class="tab-btn" role="tab"
+                id="tab-nea" aria-selected="false" aria-controls="panel-nea"
+                tabindex="-1">
+          <span class="tab-dot" style="background:#5c1a2a" aria-hidden="true"></span>
+          🗾 東北亞
+        </button>
+      </li>
+      <li role="presentation">
+        <button class="tab-btn" role="tab"
                 id="tab-sea" aria-selected="false" aria-controls="panel-sea"
                 tabindex="-1">
           <span class="tab-dot" style="background:#27ae60" aria-hidden="true"></span>
@@ -630,14 +638,6 @@
           <span class="tab-dot" style="background:#8e44ad" aria-hidden="true"></span>
           🇪🇺 歐洲
           <span class="coming-badge" aria-label="即將上線">即將上線</span>
-        </button>
-      </li>
-      <li role="presentation">
-        <button class="tab-btn" role="tab"
-                id="tab-nea" aria-selected="false" aria-controls="panel-nea"
-                tabindex="-1">
-          <span class="tab-dot" style="background:#5c1a2a" aria-hidden="true"></span>
-          🗾 東北亞
         </button>
       </li>
     </ul>
@@ -740,6 +740,61 @@
           <div class="q-card-footer">
             <button class="q-btn q-btn-coming" disabled aria-disabled="true"
                     aria-label="台灣 Q4 報告尚未發布">即將推出</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== NEA PANEL ===== -->
+  <div class="region-panel" id="panel-nea"
+       role="tabpanel" aria-labelledby="tab-nea" tabindex="0" hidden>
+    <div class="year-group">
+      <div class="year-heading">2026 年</div>
+      <div class="quarter-grid">
+
+        <div class="q-card available" style="--card-color:#5c1a2a; --card-color2:#a03050">
+          <div class="q-card-banner"></div>
+          <span class="q-new-badge" aria-label="最新">最新</span>
+          <div class="q-card-body">
+            <div class="q-label">東北亞 · 2026</div>
+            <div class="q-title">Q1</div>
+            <div class="q-months">1月 — 3月</div>
+            <div class="q-stats" aria-label="本期統計">
+              <div class="q-stat"><span class="snum">2</span><span class="slbl">國家</span></div>
+              <div class="q-stat"><span class="snum">4</span><span class="slbl">新聞</span></div>
+              <div class="q-stat"><span class="snum">3</span><span class="slbl">分類</span></div>
+            </div>
+            <div class="q-tags" aria-label="主題標籤">
+              <span class="q-tag tag-reg">法規/政策</span>
+              <span class="q-tag tag-rpet">rPET</span>
+              <span class="q-tag tag-pack">包材趨勢</span>
+            </div>
+          </div>
+          <div class="q-card-footer">
+            <a class="q-btn q-btn-available" href="reports/NEA/Q1_2026.html"
+               aria-label="閱讀東北亞 2026 Q1 報告">閱讀報告 →</a>
+          </div>
+        </div>
+
+        <div class="q-card coming">
+          <div class="q-card-banner"></div>
+          <div class="q-card-body">
+            <div class="q-label">東北亞 · 2026</div>
+            <div class="q-title">Q2</div>
+            <div class="q-months">4月 — 6月</div>
+            <div class="q-coming-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              尚未發布
+            </div>
+          </div>
+          <div class="q-card-footer">
+            <button class="q-btn q-btn-coming" disabled aria-disabled="true"
+                    aria-label="東北亞 Q2 報告尚未發布">即將推出</button>
           </div>
         </div>
 
@@ -1019,60 +1074,6 @@
     </div>
   </div>
 
-  <!-- ===== NEA PANEL ===== -->
-  <div class="region-panel" id="panel-nea"
-       role="tabpanel" aria-labelledby="tab-nea" tabindex="0" hidden>
-    <div class="year-group">
-      <div class="year-heading">2026 年</div>
-      <div class="quarter-grid">
-
-        <div class="q-card available" style="--card-color:#5c1a2a; --card-color2:#a03050">
-          <div class="q-card-banner"></div>
-          <span class="q-new-badge" aria-label="最新">最新</span>
-          <div class="q-card-body">
-            <div class="q-label">東北亞 · 2026</div>
-            <div class="q-title">Q1</div>
-            <div class="q-months">1月 — 3月</div>
-            <div class="q-stats" aria-label="本期統計">
-              <div class="q-stat"><span class="snum">2</span><span class="slbl">國家</span></div>
-              <div class="q-stat"><span class="snum">4</span><span class="slbl">新聞</span></div>
-              <div class="q-stat"><span class="snum">3</span><span class="slbl">分類</span></div>
-            </div>
-            <div class="q-tags" aria-label="主題標籤">
-              <span class="q-tag tag-reg">法規/政策</span>
-              <span class="q-tag tag-rpet">rPET</span>
-              <span class="q-tag tag-pack">包材趨勢</span>
-            </div>
-          </div>
-          <div class="q-card-footer">
-            <a class="q-btn q-btn-available" href="reports/NEA/Q1_2026.html"
-               aria-label="閱讀東北亞 2026 Q1 報告">閱讀報告 →</a>
-          </div>
-        </div>
-
-        <div class="q-card coming">
-          <div class="q-card-banner"></div>
-          <div class="q-card-body">
-            <div class="q-label">東北亞 · 2026</div>
-            <div class="q-title">Q2</div>
-            <div class="q-months">4月 — 6月</div>
-            <div class="q-coming-label">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-              尚未發布
-            </div>
-          </div>
-          <div class="q-card-footer">
-            <button class="q-btn q-btn-coming" disabled aria-disabled="true"
-                    aria-label="東北亞 Q2 報告尚未發布">即將推出</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
 
 </main>
 
