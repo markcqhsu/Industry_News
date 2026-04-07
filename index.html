@@ -124,7 +124,12 @@
     /* ============================================================
        MOBILE NAV
        ============================================================ */
-    .mobile-nav { background: var(--navy); border-bottom: 1px solid rgba(255,255,255,.1); }
+    .mobile-nav {
+      position: fixed; top: var(--header-h); left: 0; right: 0;
+      z-index: 199;
+      background: var(--navy); border-bottom: 1px solid rgba(255,255,255,.1);
+      box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    }
     .mobile-nav-list { list-style: none; display: flex; flex-direction: column; }
     .mobile-nav-list button {
       display: block; width: 100%; text-align: left;
