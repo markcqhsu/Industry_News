@@ -68,6 +68,10 @@
       border: 1px solid rgba(255,255,255,0.25);
     }
     header .badge:hover { background: rgba(255,255,255,0.32); }
+    header .title-home-link {
+      color: inherit; text-decoration: none; cursor: pointer;
+    }
+    header .title-home-link:hover { opacity: 0.85; }
     header h1 {
       font-size: 2.1rem;
       font-weight: 800;
@@ -368,7 +372,7 @@
 <!-- HEADER -->
 <header>
   <a class="badge" href="../../index.html">← 產業情報 · 季報資料庫</a>
-  <h1>大洋洲飲料與包材產業情報</h1>
+  <h1><a href="../../index.html" class="title-home-link">大洋洲飲料與包材產業情報</a></h1>
   <p class="subtitle">2026 年 Q1（1月～3月）新聞蒐集與分析報告</p>
   <div class="meta-bar">
     <span>📅 報告期間：2026.01 – 2026.03</span>
@@ -412,7 +416,11 @@
 
       <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
 
-      <div class="news-card">
+      <div class="news-card has-img">
+        <div class="news-img">
+          <img src="https://yaffa-cdn.s3.amazonaws.com/yaffadsp/images/dmImage/SourceImage/plastic-packaging.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="news-img-fallback img-reg" style="display:none"><span class="news-img-icon">♻️</span><span class="news-img-label">EPR 立法</span></div>
+        </div>
         <div class="news-body">
           <div class="news-card-top">
             <div class="news-title"><a href="https://www.packagingnews.com.au/latest/acor-calls-for-urgent-action-on-plastic-packaging" target="_blank">ACOR calls for "urgent action" on plastic packaging</a></div>
@@ -426,7 +434,11 @@
 
       <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
 
-      <div class="news-card">
+      <div class="news-card has-img">
+        <div class="news-img">
+          <img src="https://yaffa-cdn.s3.amazonaws.com/yaffadsp/images/dmImage/StandardImage/web-swanbank-facility---ipswich.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="news-img-fallback img-pack" style="display:none"><span class="news-img-icon">🏭</span><span class="news-img-label">飲料製造廠</span></div>
+        </div>
         <div class="news-body">
           <div class="news-card-top">
             <div class="news-title"><a href="https://www.packagingnews.com.au/latest/suntory-oceania-opens-smart-sustainable-beverage-hub" target="_blank">Suntory Oceania opens smart, sustainable beverage hub</a></div>
@@ -438,7 +450,11 @@
         </div>
       </div>
 
-      <div class="news-card">
+      <div class="news-card has-img">
+        <div class="news-img">
+          <img src="https://yaffa-cdn.s3.amazonaws.com/yaffadsp/images/dmImage/StandardImage/visy-tasmania---tony-simpson-mark-de-wit-anne-urquhart-julie-collins.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="news-img-fallback img-pack" style="display:none"><span class="news-img-icon">📦</span><span class="news-img-label">包材供應鏈</span></div>
+        </div>
         <div class="news-body">
           <div class="news-card-top">
             <div class="news-title"><a href="https://www.packagingnews.com.au/latest/visy-opens-new-tasmanian-packaging-hub" target="_blank">Visy opens new Tasmanian packaging hub</a></div>
@@ -452,7 +468,11 @@
 
       <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
 
-      <div class="news-card">
+      <div class="news-card has-img">
+        <div class="news-img">
+          <img src="https://yaffa-cdn.s3.amazonaws.com/yaffadsp/images/dmImage/StandardImage/image-full-plus-1.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="news-img-fallback img-new" style="display:none"><span class="news-img-icon">🥛</span><span class="news-img-label">新品上市</span></div>
+        </div>
         <div class="news-body">
           <div class="news-card-top">
             <div class="news-title"><a href="https://www.packagingnews.com.au/beverage/brownes-f-ll-builds-new-category-through-pack" target="_blank">Brownes' Füll+ builds new category through pack</a></div>
@@ -489,7 +509,11 @@
 
       <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
 
-      <div class="news-card">
+      <div class="news-card has-img">
+        <div class="news-img">
+          <img src="http://static1.squarespace.com/static/60bea313a5c6a504c6dfe531/60bea316a5c6a504c6dfe641/64cc7b5185a6cd2886a958cd/1691124805705/Suntory+Oceania+Multi-beverage+portfolio+web.jpg?format=1500w" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="news-img-fallback img-oce" style="display:none"><span class="news-img-icon">🌊</span><span class="news-img-label">大洋洲整合</span></div>
+        </div>
         <div class="news-body">
           <div class="news-card-top">
             <div class="news-title"><a href="https://www.drinksbiz.co.nz/news/beam-suntory-and-frucor-suntory-launch-suntory-oceania" target="_blank">Beam Suntory and Frucor Suntory launch Suntory Oceania</a></div>

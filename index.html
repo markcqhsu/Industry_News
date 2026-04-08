@@ -89,7 +89,9 @@
     }
     .header-brand {
       display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0;
+      text-decoration: none; color: inherit;
     }
+    .header-brand:hover .brand-name { opacity: 0.85; }
     .brand-icon svg { display: block; }
     .brand-name { font-size: var(--fs-md); font-weight: 700; color: var(--white); line-height: 1.2; }
     .brand-sub {
@@ -490,7 +492,7 @@
 <!-- ========== HEADER ========== -->
 <header class="site-header" role="banner">
   <div class="header-inner">
-    <div class="header-brand">
+    <a class="header-brand" href="./" aria-label="飲料包材情報・回到首頁">
       <div class="brand-icon" aria-hidden="true">
         <svg width="34" height="34" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="36" height="36" rx="8" fill="#1a3a5c"/>
@@ -502,7 +504,7 @@
         <div class="brand-name">飲料包材情報</div>
         <div class="brand-sub">Industry Intelligence Hub</div>
       </div>
-    </div>
+    </a>
     <div class="header-right">
       <span class="header-version" aria-label="目前版本 V1.0.19">V1.0.19</span>
     </div>
