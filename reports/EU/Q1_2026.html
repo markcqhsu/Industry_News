@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>歐洲飲料與包材產業情報報告｜2026 Q1</title>
+  <style>
+    :root {
+      --primary: #1a3a5c;
+      --accent: #2e5fc0;
+      --eu: #1a356e;
+      --eu-dark: #0f1f45;
+      --green: #27ae60;
+      --orange: #e67e22;
+      --red: #c0392b;
+      --purple: #8e44ad;
+      --gray-light: #f5f7fa;
+      --gray-mid: #dce3ed;
+      --text-main: #2c3e50;
+      --text-muted: #6c7a89;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans TC', 'Microsoft JhengHei', 'Segoe UI', sans-serif;
+      background: var(--gray-light);
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, #050e2a 0%, #1a356e 40%, #2e5fc0 100%);
+      color: white;
+      padding: 48px 40px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+    header::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    header .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    header .badge:hover { background: rgba(255,255,255,0.32); }
+    header h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    header .subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 24px;
+    }
+    .meta-bar {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      font-size: 0.82rem; color: rgba(255,255,255,0.75);
+    }
+    .meta-bar span { display: flex; align-items: center; gap: 6px; }
+
+    /* ===== NAV PILLS ===== */
+    .nav-container {
+      background: white;
+      border-bottom: 1px solid var(--gray-mid);
+      padding: 12px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow-x: auto;
+    }
+    .nav-pills { display: flex; gap: 8px; min-width: max-content; }
+    .nav-pills a {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      border: 1px solid var(--gray-mid);
+      transition: all 0.2s;
+    }
+    .nav-pills a:hover { background: var(--eu); color: white; border-color: var(--eu); }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      background: white;
+      border-bottom: 1px solid var(--gray-mid);
+      padding: 16px 40px;
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .stat-item { display: flex; flex-direction: column; align-items: center; }
+    .stat-item .num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--eu);
+      line-height: 1.2;
+    }
+    .stat-item .lbl {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ===== MAIN ===== */
+    .main { max-width: 960px; margin: 0 auto; padding: 32px 40px 60px; }
+
+    /* ===== COUNTRY SECTION ===== */
+    .country-section {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+    .country-header {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 24px;
+      background: linear-gradient(90deg, rgba(26,53,110,0.08) 0%, transparent 100%);
+      border-bottom: 1px solid var(--gray-mid);
+    }
+    .country-flag { font-size: 2rem; line-height: 1; }
+    .country-name { font-size: 1.15rem; font-weight: 700; color: var(--primary); }
+    .country-count {
+      margin-left: auto;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: white;
+      background: var(--eu);
+      padding: 3px 12px;
+      border-radius: 20px;
+    }
+    .category-group { padding: 16px 24px; }
+    .category-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 16px 0 8px;
+    }
+    .category-label:first-child { margin-top: 4px; }
+    .cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .dot-pet { background: #2980b9; }
+    .dot-pack { background: #8e44ad; }
+    .dot-cap { background: #c0392b; }
+    .dot-new { background: #27ae60; }
+    .dot-raw { background: #d68910; }
+    .dot-reg { background: #7f8c8d; }
+    .dot-sustain { background: #16a085; }
+
+    /* ===== NEWS CARD ===== */
+    .news-card {
+      background: var(--gray-light);
+      border: 1px solid var(--gray-mid);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      transition: box-shadow 0.2s;
+    }
+    .news-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .news-card.has-img {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 14px;
+    }
+    .news-img {
+      width: 160px;
+      height: 100px;
+      border-radius: 6px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--gray-mid);
+    }
+    .news-img-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border-radius: 6px;
+    }
+    .img-pet { background: linear-gradient(135deg, #e8f4fd, #b8d9f5); }
+    .img-pack { background: linear-gradient(135deg, #f5eef8, #d7bde2); }
+    .img-alum { background: linear-gradient(135deg, #fef9e7, #f9e79f); }
+    .img-new { background: linear-gradient(135deg, #eafaf1, #a9dfbf); }
+    .img-reg { background: linear-gradient(135deg, #f2f3f4, #d5d8dc); }
+    .img-sustain { background: linear-gradient(135deg, #e8f8f5, #a2d9ce); }
+    .news-img-icon { font-size: 1.5rem; }
+    .news-img-label { font-size: 0.65rem; color: var(--text-muted); font-weight: 600; }
+    .news-body { min-width: 0; }
+    .news-card-top { margin-bottom: 6px; }
+    .news-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .news-title a { color: inherit; text-decoration: none; }
+    .news-title a:hover { color: var(--eu); text-decoration: underline; }
+    .news-meta {
+      display: flex; gap: 8px;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+    .news-date { font-weight: 600; }
+    .news-source::before { content: '·'; margin-right: 8px; }
+    .news-summary {
+      font-size: 0.88rem;
+      color: #3d4f60;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-right: 4px;
+      margin-bottom: 6px;
+    }
+    .tag-pet { background: #d6eaf8; color: #1a5276; }
+    .tag-rpet { background: #d0ecff; color: #0a4a7a; }
+    .tag-pack { background: #e8daef; color: #6c3483; }
+    .tag-alum { background: #fef9e7; color: #7d6608; }
+    .tag-new { background: #d5f5e3; color: #1d6a3b; }
+    .tag-reg { background: #eaecee; color: #424949; }
+    .tag-sustain { background: #d0f0ec; color: #0e6655; }
+    .tag-epr { background: #fde8d8; color: #873600; }
+    .tag-ppwr { background: #dce7f8; color: #1a3a6e; }
+    .tag-drs { background: #d5f5e3; color: #1d6a3b; }
+    .news-link {
+      display: inline-block;
+      font-size: 0.74rem;
+      color: var(--eu);
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 4px;
+    }
+    .news-link:hover { text-decoration: underline; }
+
+    /* ===== NO NEWS ===== */
+    .no-news {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 8px 0;
+    }
+
+    /* ===== ANALYSIS SECTION ===== */
+    .analysis-section {
+      background: linear-gradient(135deg, #050e2a 0%, #1a356e 100%);
+      color: white;
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-top: 32px;
+    }
+    .analysis-section h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .analysis-card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .analysis-card h3 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 14px;
+    }
+    .bar-wrap { display: flex; flex-direction: column; gap: 10px; }
+    .bar-row { display: flex; align-items: center; gap: 10px; }
+    .bar-label { font-size: 0.78rem; min-width: 70px; color: rgba(255,255,255,0.85); }
+    .bar-bg { flex: 1; height: 8px; background: rgba(255,255,255,0.15); border-radius: 4px; overflow: hidden; }
+    .bar-fill { height: 100%; background: #f5a623; border-radius: 4px; }
+    .bar-count { font-size: 0.78rem; font-weight: 700; min-width: 20px; text-align: right; }
+    .rank-item {
+      display: flex; gap: 10px; align-items: flex-start;
+      margin-bottom: 10px; font-size: 0.84rem;
+    }
+    .rank-num {
+      background: rgba(255,255,255,0.2);
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 800;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .rank-text { color: rgba(255,255,255,0.9); line-height: 1.5; }
+    .insight-list { list-style: none; padding: 0; }
+    .insight-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.5;
+    }
+    .insight-list li::before { content: '→ '; color: #f5a623; font-weight: 700; }
+    .insight-list li:last-child { border-bottom: none; }
+    .watch-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+    .watch-item {
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .w-title { font-size: 0.84rem; font-weight: 700; margin-bottom: 6px; }
+    .w-desc { font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .main { padding: 20px 16px 40px; }
+      header { padding: 32px 20px 24px; }
+      header h1 { font-size: 1.5rem; }
+      .stats-bar { padding: 12px 20px; gap: 20px; }
+      .nav-container { padding: 10px 20px; }
+      .country-header { padding: 14px 16px; }
+      .category-group { padding: 12px 16px; }
+      .news-card.has-img { grid-template-columns: 1fr; }
+      .news-img { width: 100%; height: 160px; }
+      .analysis-grid { grid-template-columns: 1fr; }
+      .watch-grid { grid-template-columns: 1fr; }
+      .analysis-section { padding: 24px 20px; }
+      .news-summary { font-size: 0.93rem; line-height: 1.8; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="badge" href="../../index.html">← 產業情報 · 季報資料庫</a>
+  <h1>歐洲飲料與包材產業情報</h1>
+  <p class="subtitle">2026 年 Q1（1月～3月）新聞蒐集與分析報告</p>
+  <div class="meta-bar">
+    <span>📅 報告期間：2026.01 – 2026.03</span>
+    <span>🌍 涵蓋地區：德國・英國・法國・義大利・西班牙・瑞士・荷蘭・瑞典</span>
+    <span>📦 主題：PPWR・EPR・DRS・新品・包材永續</span>
+    <span>📄 生成日期：2026.04.08</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<div class="nav-container">
+  <div class="nav-pills">
+    <a href="#eu-wide">🇪🇺 歐盟整體</a>
+    <a href="#germany">🇩🇪 德國</a>
+    <a href="#uk">🇬🇧 英國</a>
+    <a href="#france">🇫🇷 法國</a>
+    <a href="#italy">🇮🇹 義大利</a>
+    <a href="#spain">🇪🇸 西班牙</a>
+    <a href="#switzerland">🇨🇭 瑞士</a>
+    <a href="#netherlands">🇳🇱 荷蘭</a>
+    <a href="#sweden">🇸🇪 瑞典</a>
+    <a href="#analysis">📊 總分析</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item"><span class="num">8</span><span class="lbl">涵蓋國家</span></div>
+  <div class="stat-item"><span class="num">9</span><span class="lbl">新聞條目</span></div>
+  <div class="stat-item"><span class="num">4</span><span class="lbl">主要分類</span></div>
+  <div class="stat-item"><span class="num">PPWR</span><span class="lbl">最熱門議題</span></div>
+  <div class="stat-item"><span class="num">法規</span><span class="lbl">最熱門驅動力</span></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ==================== EU WIDE ==================== -->
+  <div class="country-section" id="eu-wide">
+    <div class="country-header">
+      <div class="country-flag">🇪🇺</div>
+      <div>
+        <div class="country-name">歐盟整體 EU-Wide</div>
+      </div>
+      <div class="country-count">1 則新聞</div>
+    </div>
+    <div class="category-group">
+
+      <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <img src="https://images.euronews.com/articles/stories/09/68/50/18/1440x810_cmsv2_9f0f7088-cc98-5d67-99ab-37164f4b5de1-9685018.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="news-img-fallback img-reg" style="display:none">
+            <span class="news-img-icon">📋</span>
+            <span class="news-img-label">PPWR 法規</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.euronews.com/business/2026/03/16/no-more-waiting-businesses-push-for-clarity-from-eu-institutions-as-packaging-law-applies-" target="_blank">No more waiting: businesses push for clarity from EU institutions as packaging law applies</a></div>
+            <div class="news-meta"><span class="news-date">2026年3月16日</span><span class="news-source">Euronews</span></div>
+          </div>
+          <div class="news-summary">歐洲飲料協會 UNESDA 等業界組織公開呼籲歐盟機構盡快提供《包裝與包裝廢棄物法規》（PPWR）的明確執行指引。PPWR 已於 2025 年 2 月 11 日生效，主要條文將自 2026 年 8 月 12 日起適用，涵蓋包材可回收性要求、再用率目標及押金退瓶制度（DRS）等。業界強調，欠缺具體執行細節使企業難以進行投資與包裝設計決策，亟需主管機關提供明確路徑。</div>
+          <span class="tag tag-ppwr">PPWR</span><span class="tag tag-reg">法規落實</span><span class="tag tag-epr">EPR</span>
+          <a class="news-link" href="https://www.euronews.com/business/2026/03/16/no-more-waiting-businesses-push-for-clarity-from-eu-institutions-as-packaging-law-applies-" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== GERMANY ==================== -->
+  <div class="country-section" id="germany">
+    <div class="country-header">
+      <div class="country-flag">🇩🇪</div>
+      <div>
+        <div class="country-name">德國 Germany</div>
+      </div>
+      <div class="country-count">2 則新聞</div>
+    </div>
+    <div class="category-group">
+
+      <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <img src="https://cache.pressmailing.net/content/f3c44f00-96a7-4c80-b66f-8b2cdfd7dc93/Paulaner%20Cola_Bauchetikett.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="news-img-fallback img-new" style="display:none">
+            <span class="news-img-icon">🍺</span>
+            <span class="news-img-label">Paulaner Cola</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.presseportal.de/pm/19178/6226988" target="_blank">Paulaner stellt erste Cola vor: Paulaner Cola</a></div>
+            <div class="news-meta"><span class="news-date">2026年3月2日</span><span class="news-source">Paulaner Brauerei / Presseportal</span></div>
+          </div>
+          <div class="news-summary">德國知名啤酒品牌保拉納（Paulaner）首度進軍可樂市場，推出「Paulaner Cola」，以 0.33L 鋁罐裝上市，採用天然糖與精選原料，定位為德國本土精品可樂。新品以鋁罐為主要包裝形式，呼應德國飲料市場對罐裝飲料的高接受度；上市後可於部分餐飲通路與超市取得，也是品牌跨品類拓展的重要嘗試。</div>
+          <span class="tag tag-new">新品上市</span><span class="tag tag-alum">鋁罐包裝</span>
+          <a class="news-link" href="https://www.presseportal.de/pm/19178/6226988" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
+
+      <div class="news-card">
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.gleisslutz.com/en/know-how/new-german-act-set-implement-eu-packaging-regulation" target="_blank">New German Act set to implement EU Packaging Regulation</a></div>
+            <div class="news-meta"><span class="news-date">2026年3月16日</span><span class="news-source">Gleiss Lutz</span></div>
+          </div>
+          <div class="news-summary">德國聯邦政府於 2026 年 2 月 11 日通過《包裝法執行法》（VerpackDG）內閣草案，預計與 EU PPWR 同步於 2026 年 8 月 12 日生效，取代現行《包裝法》（VerpackG）。新法規強化回收率要求（2028 年起塑膠機械回收率須達 70%，2030 年達 75%），並首度將焚化排除在有效回收認列之外。飲料押金制度（Pfand）將予保留，且對無授權包裝業者最高課 20 萬歐元行政罰款。</div>
+          <span class="tag tag-reg">VerpackDG</span><span class="tag tag-ppwr">PPWR 接軌</span><span class="tag tag-sustain">回收率提升</span>
+          <a class="news-link" href="https://www.gleisslutz.com/en/know-how/new-german-act-set-implement-eu-packaging-regulation" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== UK ==================== -->
+  <div class="country-section" id="uk">
+    <div class="country-header">
+      <div class="country-flag">🇬🇧</div>
+      <div>
+        <div class="country-name">英國 United Kingdom</div>
+      </div>
+      <div class="country-count">1 則新聞</div>
+    </div>
+    <div class="category-group">
+
+      <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <img src="https://www.wastepackgroup.co.uk/wp-content/uploads/2026/03/packaging-scaled.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="news-img-fallback img-reg" style="display:none">
+            <span class="news-img-icon">♻️</span>
+            <span class="news-img-label">英國 EPR</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.wastepackgroup.co.uk/2026/03/24/pro-pepr-scheme-operator-confirmed/" target="_blank">UK Packaging PRO Confirmed as Operator for pEPR Scheme</a></div>
+            <div class="news-meta"><span class="news-date">2026年3月24日</span><span class="news-source">Wastepack Group</span></div>
+          </div>
+          <div class="news-summary">PackUK 正式確認「UK Packaging PRO」為英國包裝延伸生產者責任（pEPR）制度的執行機構，自 2026 年 4 月 1 日起分階段承接職責，成員涵蓋逾 100 家主要英國品牌、零售商與業界協會，並獲英國食品飲料協會（FDF）支持。UK Packaging PRO 將負責開發費用調節（Fee Modulation）與可回收性評估方法，並統籌公眾溝通與合規支援，為飲料與食品包材業者帶來更清晰的費率規則。</div>
+          <span class="tag tag-epr">pEPR</span><span class="tag tag-reg">費用調節</span><span class="tag tag-pack">包材合規</span>
+          <a class="news-link" href="https://www.wastepackgroup.co.uk/2026/03/24/pro-pepr-scheme-operator-confirmed/" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋 / 金屬蓋</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-raw"></span>原物料</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+    </div>
+  </div>
+
+  <!-- ==================== FRANCE ==================== -->
+  <div class="country-section" id="france">
+    <div class="country-header">
+      <div class="country-flag">🇫🇷</div>
+      <div>
+        <div class="country-name">法國 France</div>
+      </div>
+      <div class="country-count">1 則新聞</div>
+    </div>
+    <div class="category-group">
+
+      <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <img src="https://www.emballagedigest.fr/wp-content/uploads/2026/01/SLBP-SBFF-Carrefour-09122025.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="news-img-fallback img-pack" style="display:none">
+            <span class="news-img-icon">🥤</span>
+            <span class="news-img-label">無膠膜罐裝</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.emballagedigest.fr/en/boissons-sans-alcool-nouvel-accord-entre-suntory-beverage-food-france-et-carrefour/" target="_blank">Boissons sans alcool : nouvel accord entre Suntory Beverage & Food France et Carrefour</a></div>
+            <div class="news-meta"><span class="news-date">2026年1月28日</span><span class="news-source">Emballage Digest</span></div>
+          </div>
+          <div class="news-summary">三得利法國（Suntory Beverage & Food France）與家樂福（Carrefour）簽署永續連結商業計畫（SLBP），並自 2026 年 1 月至 5 月在布列塔尼 10 家家樂福門市試行「無塑膠膜罐裝單賣」實驗——消費者可自由挑選 Oasis、Orangina、Schweppes 三品牌罐裝飲料組成 6 入虛擬組合，無需傳統聚乙烯收縮膜包裝。若全面推廣，估計每年可節省 53 噸塑膠與 125 噸 CO₂ 當量；整體合作目標 2030 年前減少 520 噸塑膠並達成全品牌瓶身 100% rPET。</div>
+          <span class="tag tag-pack">減塑包材</span><span class="tag tag-sustain">永續合作</span><span class="tag tag-rpet">rPET 目標</span>
+          <a class="news-link" href="https://www.emballagedigest.fr/en/boissons-sans-alcool-nouvel-accord-entre-suntory-beverage-food-france-et-carrefour/" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋 / 金屬蓋</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-raw"></span>原物料</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+    </div>
+  </div>
+
+  <!-- ==================== ITALY ==================== -->
+  <div class="country-section" id="italy">
+    <div class="country-header">
+      <div class="country-flag">🇮🇹</div>
+      <div>
+        <div class="country-name">義大利 Italy</div>
+      </div>
+      <div class="country-count">1 則新聞</div>
+    </div>
+    <div class="category-group">
+
+      <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <img src="https://www.tecnofoodonline.com/wp-content/uploads/2026/03/packaging.png" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="news-img-fallback img-sustain" style="display:none">
+            <span class="news-img-icon">🌿</span>
+            <span class="news-img-label">生態設計</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.tecnofoodonline.com/2026/03/15/ecopack-2026-conai-launches-the-13th-eco-design-call-for-sustainable-packaging/" target="_blank">Ecopack 2026: CONAI launches the 13th eco-design call for sustainable packaging</a></div>
+            <div class="news-meta"><span class="news-date">2026年3月15日</span><span class="news-source">Tecno Food</span></div>
+          </div>
+          <div class="news-summary">義大利國家包裝聯合會 CONAI 正式啟動第 13 屆「Ecopack 2026」永續包材生態設計競賽，徵件期為 2026 年 3 月 3 日至 4 月 30 日，總獎金 60 萬歐元。競賽涵蓋鋼、鋁、紙、木、塑膠、生物可分解塑膠與玻璃等材質，評估指標包含再使用、回收便利性、再生原料使用率及生命週期分析（LCA）。飲料包材業者可藉此競賽取得 CONAI 官方認可，對於推廣 rPET 飲料瓶與永續鋁罐設計具有實質意義。</div>
+          <span class="tag tag-pack">生態設計</span><span class="tag tag-sustain">永續包材</span><span class="tag tag-rpet">rPET</span>
+          <a class="news-link" href="https://www.tecnofoodonline.com/2026/03/15/ecopack-2026-conai-launches-the-13th-eco-design-call-for-sustainable-packaging/" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋 / 金屬蓋</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-raw"></span>原物料</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+    </div>
+  </div>
+
+  <!-- ==================== SPAIN ==================== -->
+  <div class="country-section" id="spain">
+    <div class="country-header">
+      <div class="country-flag">🇪🇸</div>
+      <div>
+        <div class="country-name">西班牙 Spain</div>
+      </div>
+      <div class="country-count">1 則新聞</div>
+    </div>
+    <div class="category-group">
+
+      <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <img src="https://cdn.restauracionnews.com/2026/02/Reglamento-envases-1.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="news-img-fallback img-reg" style="display:none">
+            <span class="news-img-icon">📋</span>
+            <span class="news-img-label">EU 包裝法規</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://restauracionnews.com/2026/02/nuevo-reglamento-europeo-envases/" target="_blank">Nuevo reglamento de envases ¿Qué cambia para el hostelero?</a></div>
+            <div class="news-meta"><span class="news-date">2026年2月6日</span><span class="news-source">Restauración News</span></div>
+          </div>
+          <div class="news-summary">歐盟新《包裝與包裝廢棄物規章》（PPWR，(EU) 2025/40）將自 2026 年 8 月 12 日起在西班牙及全體成員國適用，取代逾 30 年的舊指令。對餐飲業最具影響的條文包括：飲料外帶業者須允許顧客使用自帶容器（Bring Your Own Container）、2030 年起 40% 外帶飲料必須提供可重複使用選項，以及 2029 年前實施 PET 飲料瓶與鋁罐押金退瓶制度（DRS）。業界須及早評估包材設計與作業流程的合規衝擊。</div>
+          <span class="tag tag-ppwr">PPWR</span><span class="tag tag-reg">西班牙合規</span><span class="tag tag-drs">DRS</span>
+          <a class="news-link" href="https://restauracionnews.com/2026/02/nuevo-reglamento-europeo-envases/" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋 / 金屬蓋</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-raw"></span>原物料</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+    </div>
+  </div>
+
+  <!-- ==================== SWITZERLAND ==================== -->
+  <div class="country-section" id="switzerland">
+    <div class="country-header">
+      <div class="country-flag">🇨🇭</div>
+      <div>
+        <div class="country-name">瑞士 Switzerland</div>
+      </div>
+      <div class="country-count">1 則新聞</div>
+    </div>
+    <div class="category-group">
+
+      <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
+
+      <div class="news-card">
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://petrecycling.ch/fr/actualites/prise-de-position-de-lassociation-pet-recycling-schweiz/" target="_blank">Prise de position de l'association PET-Recycling Schweiz</a></div>
+            <div class="news-meta"><span class="news-date">2026年2月4日</span><span class="news-source">PET-Recycling Schweiz</span></div>
+          </div>
+          <div class="news-summary">瑞士 PET 回收協會（PET-Recycling Schweiz）發表正式聲明，回應 2026 年 2 月 1 日《NZZ am Sonntag》報導中有關 PET 飲料瓶遭焚化而非回收的指控。協會指出相關測試方法不適切、數據結論有誤，並重申瑞士 PET 飲料瓶回收率已超過 80%，位居歐洲前列。此事件顯示，即便在回收基礎建設完善的國家，供應鏈透明度與消費者認知仍是需持續維護的公信力課題。</div>
+          <span class="tag tag-pet">PET 回收</span><span class="tag tag-sustain">供應鏈透明</span>
+          <a class="news-link" href="https://petrecycling.ch/fr/actualites/prise-de-position-de-lassociation-pet-recycling-schweiz/" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋 / 金屬蓋</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-raw"></span>原物料</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+    </div>
+  </div>
+
+  <!-- ==================== NETHERLANDS ==================== -->
+  <div class="country-section" id="netherlands">
+    <div class="country-header">
+      <div class="country-flag">🇳🇱</div>
+      <div>
+        <div class="country-name">荷蘭 Netherlands</div>
+      </div>
+      <div class="country-count">0 則新聞</div>
+    </div>
+    <div class="category-group">
+
+      <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋 / 金屬蓋</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-raw"></span>原物料</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+    </div>
+  </div>
+
+  <!-- ==================== SWEDEN ==================== -->
+  <div class="country-section" id="sweden">
+    <div class="country-header">
+      <div class="country-flag">🇸🇪</div>
+      <div>
+        <div class="country-name">瑞典 Sweden</div>
+      </div>
+      <div class="country-count">1 則新聞</div>
+    </div>
+    <div class="category-group">
+
+      <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
+
+      <div class="news-card has-img">
+        <div class="news-img">
+          <img src="https://d2wrwj382xgrci.cloudfront.net/Pictures/480xany/0/3/8/19038_swedendrs_924262.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="news-img-fallback img-sustain" style="display:none">
+            <span class="news-img-icon">♻️</span>
+            <span class="news-img-label">瑞典 DRS</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://packagingeurope.com/news/over-3-billion-pet-bottles-and-aluminium-cans-returned-through-swedish-drs-in-2025/14072.article" target="_blank">Over 3 billion PET bottles and aluminium cans returned through Swedish DRS in 2025</a></div>
+            <div class="news-meta"><span class="news-date">2026年3月25日</span><span class="news-source">Packaging Europe</span></div>
+          </div>
+          <div class="news-summary">瑞典押金退瓶制度（DRS）運營機構 Returpack 公布 2025 年度成果：全年共回收超過 30 億個 PET 飲料瓶與鋁罐，回收率達 87.9%，創歷史新高，顯示該制度持續穩健運作。其中鋁罐回收量年增明顯，反映消費者對罐裝飲料的使用上升。瑞典的高效 DRS 模式為歐盟 PPWR 規定各成員國 2029 年前達成 90% 回收率目標的重要參考範例。</div>
+          <span class="tag tag-drs">DRS 回收</span><span class="tag tag-pet">PET 飲料瓶</span><span class="tag tag-alum">鋁罐回收</span>
+          <a class="news-link" href="https://packagingeurope.com/news/over-3-billion-pet-bottles-and-aluminium-cans-returned-through-swedish-drs-in-2025/14072.article" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋 / 金屬蓋</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-raw"></span>原物料</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+    </div>
+  </div>
+
+  <!-- ==================== ANALYSIS ==================== -->
+  <div class="analysis-section" id="analysis">
+    <h2>📊 Q1 2026 歐洲市場總分析</h2>
+
+    <div class="analysis-grid">
+      <div class="analysis-card">
+        <h3>各國新聞數量</h3>
+        <div class="bar-wrap">
+          <div class="bar-row">
+            <span class="bar-label">🇪🇺 歐盟整體</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:100%"></div></div>
+            <span class="bar-count">1</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">🇩🇪 德國</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:100%"></div></div>
+            <span class="bar-count">2</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">🇬🇧 英國</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div>
+            <span class="bar-count">1</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">🇫🇷 法國</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div>
+            <span class="bar-count">1</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">🇮🇹 義大利</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div>
+            <span class="bar-count">1</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">🇪🇸 西班牙</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div>
+            <span class="bar-count">1</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">🇨🇭 瑞士</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div>
+            <span class="bar-count">1</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">🇸🇪 瑞典</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div>
+            <span class="bar-count">1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-card">
+        <h3>主題分布</h3>
+        <div class="bar-wrap">
+          <div class="bar-row">
+            <span class="bar-label">法規/政策</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:100%"></div></div>
+            <span class="bar-count">6</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">包材永續</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div>
+            <span class="bar-count">2</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">新品發布</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:17%"></div></div>
+            <span class="bar-count">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="analysis-card" style="margin-bottom:20px">
+      <h3>本期主要洞察</h3>
+      <ul class="insight-list">
+        <li>PPWR 為本期最核心驅動力：德國、英國、西班牙、歐盟整體均有直接相關報導，2026 年 8 月生效的主要條文正推動各國加速建立法規接軌機制。</li>
+        <li>德國通過《包裝法執行法》（VerpackDG）內閣草案，強化塑膠回收率門檻並排除焚化認列，為歐洲最具代表性的 PPWR 國內轉化進展。</li>
+        <li>英國雖脫歐，同步啟動 pEPR 費用調節制度，確認執行機構 UK Packaging PRO，顯示獨立市場仍採取與歐盟平行的 EPR 政策路徑。</li>
+        <li>法國三得利與家樂福合作，在實體通路試行「去除收縮膜」罐裝飲料，是本期最具參考價值的包材減塑創新案例。</li>
+        <li>瑞典 DRS 達成 30 億個容器回收里程碑，為 PPWR 要求各成員國 2029 年完成 DRS 的成功示範。</li>
+        <li>義大利 CONAI Ecopack 2026 正式徵件，鼓勵飲料包材業者從生命週期角度進行設計優化，具體操作路徑明確。</li>
+        <li>荷蘭本期無明確 Q1 2026 飲料包材新聞，但 Verpact 正面臨 90% 回收率法定目標壓力，DRS 擴點計畫持續推進中。</li>
+      </ul>
+    </div>
+
+    <div class="analysis-card" style="margin-bottom:20px">
+      <h3>各國共同趨勢與差異</h3>
+      <ul class="insight-list">
+        <li>共同趨勢：PPWR 成為歐洲包材市場最大公約數，各國 2026 年均以接軌 PPWR 為首要任務，推動 DRS、EPR 費用調節與可回收性標準化。</li>
+        <li>差異點：德、英已進入本地立法轉化階段，法、義、西、瑞士仍在準備期；北歐（瑞典）在 DRS 執行成效上領先南歐。</li>
+        <li>新品創新集中於德國（鋁罐新飲料品類）；包材減塑創新集中於法國（去除收縮膜）；制度創新集中於英國（EPR 機構確立）。</li>
+      </ul>
+    </div>
+
+    <h3 style="font-size:0.88rem;font-weight:700;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;">後續追蹤重點</h3>
+    <div class="watch-grid">
+      <div class="watch-item">
+        <div class="w-title">PPWR 執行細則</div>
+        <div class="w-desc">2026 年 8 月生效前，歐盟是否提供可回收性評估方法、DRS 豁免標準等具體執行細則，直接影響業者包材設計決策。</div>
+      </div>
+      <div class="watch-item">
+        <div class="w-title">各國 DRS 進度</div>
+        <div class="w-desc">法國、義大利、西班牙尚未建立正式 DRS，2029 年截止期限逼近，各國立法與系統建置進度值得持續追蹤。</div>
+      </div>
+      <div class="watch-item">
+        <div class="w-title">EPR 費用調節影響</div>
+        <div class="w-desc">英、德 EPR 費率依包材可回收性差異調整，對 rPET 瓶、鋁罐與玻璃瓶的相對成本將產生結構性影響，需密切關注費率公布。</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- .main -->
+
+</body>
+</html>
