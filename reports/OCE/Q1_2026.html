@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大洋洲飲料與包材產業情報報告｜2026 Q1</title>
+  <style>
+    :root {
+      --primary: #1a3a5c;
+      --accent: #0d6e72;
+      --oce: #0d6e72;
+      --oce-dark: #07474a;
+      --green: #27ae60;
+      --orange: #e67e22;
+      --red: #c0392b;
+      --purple: #8e44ad;
+      --gray-light: #f5f7fa;
+      --gray-mid: #dce3ed;
+      --text-main: #2c3e50;
+      --text-muted: #6c7a89;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans TC', 'Microsoft JhengHei', 'Segoe UI', sans-serif;
+      background: var(--gray-light);
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, #021a1b 0%, #0d6e72 45%, #17a2a8 100%);
+      color: white;
+      padding: 48px 40px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+    header::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    header .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    header .badge:hover { background: rgba(255,255,255,0.32); }
+    header h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    header .subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 24px;
+    }
+    .meta-bar {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      font-size: 0.82rem; color: rgba(255,255,255,0.75);
+    }
+    .meta-bar span { display: flex; align-items: center; gap: 6px; }
+
+    /* ===== NAV PILLS ===== */
+    .nav-container {
+      background: white;
+      border-bottom: 1px solid var(--gray-mid);
+      padding: 12px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow-x: auto;
+    }
+    .nav-pills { display: flex; gap: 8px; min-width: max-content; }
+    .nav-pills a {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      border: 1px solid var(--gray-mid);
+      transition: all 0.2s;
+    }
+    .nav-pills a:hover { background: var(--oce); color: white; border-color: var(--oce); }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      background: white;
+      border-bottom: 1px solid var(--gray-mid);
+      padding: 16px 40px;
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .stat-item { display: flex; flex-direction: column; align-items: center; }
+    .stat-item .num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--oce);
+      line-height: 1.2;
+    }
+    .stat-item .lbl {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ===== MAIN ===== */
+    .main { max-width: 960px; margin: 0 auto; padding: 32px 40px 60px; }
+
+    /* ===== COUNTRY SECTION ===== */
+    .country-section {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+    .country-header {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 24px;
+      background: linear-gradient(90deg, rgba(13,110,114,0.08) 0%, transparent 100%);
+      border-bottom: 1px solid var(--gray-mid);
+    }
+    .country-flag { font-size: 2rem; line-height: 1; }
+    .country-name { font-size: 1.15rem; font-weight: 700; color: var(--primary); }
+    .country-count {
+      margin-left: auto;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: white;
+      background: var(--oce);
+      padding: 3px 12px;
+      border-radius: 20px;
+    }
+    .category-group { padding: 16px 24px; }
+    .category-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 16px 0 8px;
+    }
+    .category-label:first-child { margin-top: 4px; }
+    .cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .dot-pet { background: #2980b9; }
+    .dot-pack { background: #8e44ad; }
+    .dot-cap { background: #c0392b; }
+    .dot-new { background: #27ae60; }
+    .dot-raw { background: #d68910; }
+    .dot-reg { background: #7f8c8d; }
+    .dot-sustain { background: #16a085; }
+
+    /* ===== NEWS CARD ===== */
+    .news-card {
+      background: var(--gray-light);
+      border: 1px solid var(--gray-mid);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      transition: box-shadow 0.2s;
+    }
+    .news-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .news-card.has-img {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 14px;
+    }
+    .news-img {
+      width: 160px;
+      height: 100px;
+      border-radius: 6px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--gray-mid);
+    }
+    .news-img-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border-radius: 6px;
+    }
+    .img-pet { background: linear-gradient(135deg, #e8f4fd, #b8d9f5); }
+    .img-pack { background: linear-gradient(135deg, #f5eef8, #d7bde2); }
+    .img-alum { background: linear-gradient(135deg, #fef9e7, #f9e79f); }
+    .img-new { background: linear-gradient(135deg, #eafaf1, #a9dfbf); }
+    .img-reg { background: linear-gradient(135deg, #f2f3f4, #d5d8dc); }
+    .img-sustain { background: linear-gradient(135deg, #e0f7f5, #a2d9ce); }
+    .img-oce { background: linear-gradient(135deg, #e0f5f5, #80cdd0); }
+    .news-img-icon { font-size: 1.5rem; }
+    .news-img-label { font-size: 0.65rem; color: var(--text-muted); font-weight: 600; }
+    .news-body { min-width: 0; }
+    .news-card-top { margin-bottom: 6px; }
+    .news-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .news-title a { color: inherit; text-decoration: none; }
+    .news-title a:hover { color: var(--oce); text-decoration: underline; }
+    .news-meta {
+      display: flex; gap: 8px;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+    .news-date { font-weight: 600; }
+    .news-source::before { content: '·'; margin-right: 8px; }
+    .news-summary {
+      font-size: 0.88rem;
+      color: #3d4f60;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-right: 4px;
+      margin-bottom: 6px;
+    }
+    .tag-pet { background: #d6eaf8; color: #1a5276; }
+    .tag-rpet { background: #d0ecff; color: #0a4a7a; }
+    .tag-pack { background: #e8daef; color: #6c3483; }
+    .tag-alum { background: #fef9e7; color: #7d6608; }
+    .tag-new { background: #d5f5e3; color: #1d6a3b; }
+    .tag-reg { background: #eaecee; color: #424949; }
+    .tag-sustain { background: #d0f0ec; color: #0e6655; }
+    .tag-epr { background: #fde8d8; color: #873600; }
+    .tag-oce { background: #d0f0f0; color: #0d4e52; }
+    .news-link {
+      display: inline-block;
+      font-size: 0.74rem;
+      color: var(--oce);
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 4px;
+    }
+    .news-link:hover { text-decoration: underline; }
+
+    /* ===== NO NEWS ===== */
+    .no-news {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 8px 0;
+    }
+
+    /* ===== ANALYSIS SECTION ===== */
+    .analysis-section {
+      background: linear-gradient(135deg, #021a1b 0%, #0d6e72 100%);
+      color: white;
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-top: 32px;
+    }
+    .analysis-section h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .analysis-card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .analysis-card h3 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 14px;
+    }
+    .bar-wrap { display: flex; flex-direction: column; gap: 10px; }
+    .bar-row { display: flex; align-items: center; gap: 10px; }
+    .bar-label { font-size: 0.78rem; min-width: 70px; color: rgba(255,255,255,0.85); }
+    .bar-bg { flex: 1; height: 8px; background: rgba(255,255,255,0.15); border-radius: 4px; overflow: hidden; }
+    .bar-fill { height: 100%; background: #f5a623; border-radius: 4px; }
+    .bar-count { font-size: 0.78rem; font-weight: 700; min-width: 20px; text-align: right; }
+    .insight-list { list-style: none; padding: 0; }
+    .insight-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.5;
+    }
+    .insight-list li::before { content: '→ '; color: #f5a623; font-weight: 700; }
+    .insight-list li:last-child { border-bottom: none; }
+    .watch-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+    .watch-item {
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .w-title { font-size: 0.84rem; font-weight: 700; margin-bottom: 6px; }
+    .w-desc { font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .main { padding: 20px 16px 40px; }
+      header { padding: 32px 20px 24px; }
+      header h1 { font-size: 1.5rem; }
+      .stats-bar { padding: 12px 20px; gap: 20px; }
+      .nav-container { padding: 10px 20px; }
+      .country-header { padding: 14px 16px; }
+      .category-group { padding: 12px 16px; }
+      .news-card.has-img { grid-template-columns: 1fr; }
+      .news-img { width: 100%; height: 160px; }
+      .analysis-grid { grid-template-columns: 1fr; }
+      .watch-grid { grid-template-columns: 1fr; }
+      .analysis-section { padding: 24px 20px; }
+      .news-summary { font-size: 0.93rem; line-height: 1.8; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="badge" href="../../index.html">← 產業情報 · 季報資料庫</a>
+  <h1>大洋洲飲料與包材產業情報</h1>
+  <p class="subtitle">2026 年 Q1（1月～3月）新聞蒐集與分析報告</p>
+  <div class="meta-bar">
+    <span>📅 報告期間：2026.01 – 2026.03</span>
+    <span>🌊 涵蓋地區：澳洲・紐西蘭</span>
+    <span>📦 主題：包材改革・EPR・新品・永續製造</span>
+    <span>📄 生成日期：2026.04.08</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<div class="nav-container">
+  <div class="nav-pills">
+    <a href="#australia">🇦🇺 澳洲</a>
+    <a href="#newzealand">🇳🇿 紐西蘭</a>
+    <a href="#analysis">📊 總分析</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item"><span class="num">2</span><span class="lbl">涵蓋國家</span></div>
+  <div class="stat-item"><span class="num">5</span><span class="lbl">新聞條目</span></div>
+  <div class="stat-item"><span class="num">4</span><span class="lbl">主要分類</span></div>
+  <div class="stat-item"><span class="num">EPR</span><span class="lbl">最熱門議題</span></div>
+  <div class="stat-item"><span class="num">包材</span><span class="lbl">最熱門驅動力</span></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ==================== AUSTRALIA ==================== -->
+  <div class="country-section" id="australia">
+    <div class="country-header">
+      <div class="country-flag">🇦🇺</div>
+      <div>
+        <div class="country-name">澳洲 Australia</div>
+      </div>
+      <div class="country-count">4 則新聞</div>
+    </div>
+    <div class="category-group">
+
+      <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
+
+      <div class="news-card">
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.packagingnews.com.au/latest/acor-calls-for-urgent-action-on-plastic-packaging" target="_blank">ACOR calls for "urgent action" on plastic packaging</a></div>
+            <div class="news-meta"><span class="news-date">2026年1月6日</span><span class="news-source">PKN Packaging News</span></div>
+          </div>
+          <div class="news-summary">澳洲回收業協會（ACOR）發出警告，指若聯邦政府不盡快立法推行強制性「延伸生產者責任」（EPR）制度，澳洲塑膠回收業將面臨崩潰。目前澳洲每年產生 130 萬噸塑膠包裝，但超過百萬噸最終流入垃圾掩埋場或成為垃圾污染。ACOR 提出，強制性 EPR 方案可在 5 年內創造 25 億澳元經濟附加價值、減少 37 萬噸年度塑膠廢棄物，並新增約 2 萬個就業機會；若不採取行動，回收設施使用率恐在 5 年內降至僅 32%。</div>
+          <span class="tag tag-reg">EPR 立法</span><span class="tag tag-epr">強制責任制</span><span class="tag tag-sustain">回收改革</span>
+          <a class="news-link" href="https://www.packagingnews.com.au/latest/acor-calls-for-urgent-action-on-plastic-packaging" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
+
+      <div class="news-card">
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.packagingnews.com.au/latest/suntory-oceania-opens-smart-sustainable-beverage-hub" target="_blank">Suntory Oceania opens smart, sustainable beverage hub</a></div>
+            <div class="news-meta"><span class="news-date">2026年1月（Q1）</span><span class="news-source">PKN Packaging News</span></div>
+          </div>
+          <div class="news-summary">三得利大洋洲（Suntory Oceania）正式啟用位於昆士蘭伊普斯維奇（Ipswich）Swanbank 的 4 億澳元旗艦飲料製造中心，該廠採碳中和設計，導入太陽能、生質能與廢熱回收系統。生產線由 Krones 與 KHS 提供，涵蓋精餾酒、RTD、軟性飲料、果汁、咖啡及能量飲料等逾 40 個品牌一站式製造，是澳洲近十年最重要的飲料包裝投資，對大洋洲供應鏈整合意義重大。</div>
+          <span class="tag tag-pack">飲料製造</span><span class="tag tag-sustain">碳中和廠房</span><span class="tag tag-oce">大洋洲</span>
+          <a class="news-link" href="https://www.packagingnews.com.au/latest/suntory-oceania-opens-smart-sustainable-beverage-hub" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.packagingnews.com.au/latest/visy-opens-new-tasmanian-packaging-hub" target="_blank">Visy opens new Tasmanian packaging hub</a></div>
+            <div class="news-meta"><span class="news-date">2026年2月25日</span><span class="news-source">PKN Packaging News</span></div>
+          </div>
+          <div class="news-summary">澳洲包材龍頭 Visy 在塔斯馬尼亞州德文港（Devonport）正式開設新包裝中心，總投資承諾逾 2000 萬澳元，提供 8,500 平方公尺倉儲與辦公空間。新廠主要供應紙板包裝給塔州莓果農、釀酒廠及乳品加工廠，可提供即時交貨的彈性供應服務。聯邦農業部長 Julie Collins 親臨揭幕，顯示政府對塔州農業與食品飲料製造業的重視。</div>
+          <span class="tag tag-pack">包材供應鏈</span><span class="tag tag-sustain">農業飲料</span>
+          <a class="news-link" href="https://www.packagingnews.com.au/latest/visy-opens-new-tasmanian-packaging-hub" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
+
+      <div class="news-card">
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.packagingnews.com.au/beverage/brownes-f-ll-builds-new-category-through-pack" target="_blank">Brownes' Füll+ builds new category through pack</a></div>
+            <div class="news-meta"><span class="news-date">2026年2月24日</span><span class="news-source">PKN Packaging News</span></div>
+          </div>
+          <div class="news-summary">西澳乳品品牌 Brownes Dairy 推出「Füll+」高蛋白液態餐飲新品（480ml、每份含 35g 蛋白質），以 Visy 供應的不透明白色 PET 瓶為主要包裝，材質遮光設計專為保護光敏性維生素與礦物質配方。產品以「On the Go Meal」重新定義品類，刻意跳脫傳統運動補充品的黑色暗色調，採極簡現代標籤（由 Labelmakers WA 供應），首波在全澳 Coles 超市冷藏鮮奶區上架，售價 5.95 澳元。</div>
+          <span class="tag tag-new">新品上市</span><span class="tag tag-pet">PET 瓶</span><span class="tag tag-pack">包裝創新</span>
+          <a class="news-link" href="https://www.packagingnews.com.au/beverage/brownes-f-ll-builds-new-category-through-pack" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋 / 金屬蓋</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-raw"></span>原物料</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+    </div>
+  </div>
+
+  <!-- ==================== NEW ZEALAND ==================== -->
+  <div class="country-section" id="newzealand">
+    <div class="country-header">
+      <div class="country-flag">🇳🇿</div>
+      <div>
+        <div class="country-name">紐西蘭 New Zealand</div>
+      </div>
+      <div class="country-count">1 則新聞</div>
+    </div>
+    <div class="category-group">
+
+      <div class="category-label"><span class="cat-dot dot-new"></span>新品 / 新包裝</div>
+
+      <div class="news-card">
+        <div class="news-body">
+          <div class="news-card-top">
+            <div class="news-title"><a href="https://www.drinksbiz.co.nz/news/beam-suntory-and-frucor-suntory-launch-suntory-oceania" target="_blank">Beam Suntory and Frucor Suntory launch Suntory Oceania</a></div>
+            <div class="news-meta"><span class="news-date">2026年1月1日</span><span class="news-source">Drinksbiz Magazine NZ</span></div>
+          </div>
+          <div class="news-summary">三得利旗下 Beam Suntory 與 Frucor Suntory 正式合併為「Suntory Oceania」，並於 2026 年 1 月 1 日起全面接管紐西蘭市場的銷售、供應鏈與配送業務，成為大洋洲第四大多品類飲料集團。紐西蘭營運規模逾 150 人的銷售團隊，整合管理包括 Jim Beam、V Energy、Pepsi、Maximus 等逾 40 個品牌，並升級奧克蘭生產設施；首批上市重點新品為採用 Freeze Crush Infusion 技術的 Suntory -196 日本 RTD 飲料。</div>
+          <span class="tag tag-new">品牌重組</span><span class="tag tag-oce">大洋洲整合</span><span class="tag tag-pack">RTD 新品</span>
+          <a class="news-link" href="https://www.drinksbiz.co.nz/news/beam-suntory-and-frucor-suntory-launch-suntory-oceania" target="_blank">🔗 閱讀原文</a>
+        </div>
+      </div>
+
+      <div class="category-label"><span class="cat-dot dot-pet"></span>寶特瓶飲料（PET Bottled Beverages）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-pack"></span>包材（Packaging）</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-cap"></span>鋁蓋 / 爪蓋 / 金屬蓋</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-raw"></span>原物料</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+      <div class="category-label"><span class="cat-dot dot-reg"></span>法規 / 政策</div>
+      <p class="no-news">本期未找到高度相關新聞</p>
+
+    </div>
+  </div>
+
+  <!-- ==================== ANALYSIS ==================== -->
+  <div class="analysis-section" id="analysis">
+    <h2>📊 Q1 2026 大洋洲市場總分析</h2>
+
+    <div class="analysis-grid">
+      <div class="analysis-card">
+        <h3>各國新聞數量</h3>
+        <div class="bar-wrap">
+          <div class="bar-row">
+            <span class="bar-label">🇦🇺 澳洲</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:100%"></div></div>
+            <span class="bar-count">4</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">🇳🇿 紐西蘭</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:25%"></div></div>
+            <span class="bar-count">1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-card">
+        <h3>主題分布</h3>
+        <div class="bar-wrap">
+          <div class="bar-row">
+            <span class="bar-label">包材供應鏈</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:80%"></div></div>
+            <span class="bar-count">2</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">新品/新包裝</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:80%"></div></div>
+            <span class="bar-count">2</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">法規/政策</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:40%"></div></div>
+            <span class="bar-count">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="analysis-card" style="margin-bottom:20px">
+      <h3>本期主要洞察</h3>
+      <ul class="insight-list">
+        <li>澳洲本期新聞集中在兩大主軸：一是產業呼籲聯邦政府盡速立法強制 EPR（延伸生產者責任），二是重大飲料製造基礎設施投資（Suntory Oceania Swanbank、Visy 塔斯馬尼亞）。</li>
+        <li>Suntory Oceania 整合澳紐市場是本期最大規模產業事件，4 億澳元碳中和飲料製造廠代表大洋洲飲料包裝供應鏈的重組。</li>
+        <li>Brownes Dairy Füll+ 以不透明 PET 瓶切入高蛋白飲料品類，是本期最具包裝創新意義的新品案例——PET 瓶功能性設計（遮光、冷藏保存）是亮點。</li>
+        <li>澳洲 2025 年國家包裝目標（National Packaging Targets）全面未達標，推動 ACOR 與業界在 Q1 2026 加強施壓，預計 2026 年聯邦政府包裝改革立法有推進機會。</li>
+        <li>紐西蘭本期 Q1 2026 飲料包材專屬新聞稀少，主要靠 Suntory Oceania 整合進入市場作為代表性事件，後續押金退瓶制度（CRS）立法動態仍待追蹤。</li>
+      </ul>
+    </div>
+
+    <h3 style="font-size:0.88rem;font-weight:700;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;">後續追蹤重點</h3>
+    <div class="watch-grid">
+      <div class="watch-item">
+        <div class="w-title">澳洲 EPR 立法進度</div>
+        <div class="w-desc">ACOR 積極施壓之後，聯邦政府是否在 2026 年提出強制性包裝 EPR 立法草案，對塑膠包裝產業成本結構影響重大。</div>
+      </div>
+      <div class="watch-item">
+        <div class="w-title">紐西蘭 CRS 押金制</div>
+        <div class="w-desc">紐西蘭押金退瓶制度（Container Return Scheme）遭擱置後，民意支持度仍達 76%，政府態度是否轉變值得持續追蹤。</div>
+      </div>
+      <div class="watch-item">
+        <div class="w-title">Suntory Oceania 展望</div>
+        <div class="w-desc">新整合後的大洋洲飲料集團攜帶 40+ 品牌切入市場，其包材選擇策略（PET/鋁罐/玻璃比例）與永續包裝目標值得後續觀察。</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- .main -->
+
+</body>
+</html>
